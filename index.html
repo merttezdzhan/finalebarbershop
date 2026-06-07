@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="title">Finale Barbershop | Randevu Al</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">Finale<span>Barbershop</span></div>
+        <ul class="nav-links">
+            <li><a href="#home" data-i18n="navHome">Ana Sayfa</a></li>
+            <li><a href="#services" data-i18n="navServices">Hizmetler</a></li>
+            <li><a href="#gallery" data-i18n="navGallery">Galeri</a></li>
+            <li><a href="#contact" data-i18n="navContact">İletişim</a></li>
+            <li><a href="#booking" class="btn-primary" data-i18n="navBooking">Randevu Al</a></li>
+            <li>
+                <select id="languageSelector" onchange="changeLanguage(this.value)">
+                    <option value="tr">TR</option>
+                    <option value="en">EN</option>
+                    <option value="de">DE</option>
+                </select>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="home" class="hero">
+        <div class="hero-content">
+            <h1 data-i18n="heroTitle">Tarzınızı Yeniden Keşfedin</h1>
+            <p data-i18n="heroSubtitle">Premium bakım deneyimi için yerinizi hemen ayırtın.</p>
+            <a href="#booking" class="btn-primary large pulse-btn" data-i18n="heroBtn">Hemen Randevu Al</a>
+        </div>
+    </header>
+
+    <!-- Services & Pricing Section -->
+    <section id="services" class="services">
+        <h2 data-i18n="servicesTitle">Hizmetlerimiz & Fiyatlar</h2>
+        
+        <div class="service-cards">
+            <div class="card" onclick="selectService('Saç Kesimi')">
+                <h3 data-i18n="service1Title">Saç Kesimi</h3>
+                <p data-i18n="service1Desc">Modern ve klasik saç kesimleri.</p>
+            </div>
+            <div class="card" onclick="selectService('Sakal Tıraşı')">
+                <h3 data-i18n="service2Title">Sakal Tıraşı</h3>
+                <p data-i18n="service2Desc">Özel bakım ürünleri ile sakal şekillendirme.</p>
+            </div>
+            <div class="card" onclick="selectService('Saç & Sakal')">
+                <h3 data-i18n="service3Title">Saç & Sakal</h3>
+                <p data-i18n="service3Desc">Tam kapsamlı premium bakım.</p>
+            </div>
+        </div>
+
+        <div class="pricing-table">
+            <h3 data-i18n="priceListTitle">Fiyat Listesi</h3>
+            <ul>
+                <li><span data-i18n="price1Title">Sadece Saç Kesimi</span> <span class="price">€15</span></li>
+                <li><span data-i18n="price2Title">Sadece Sakal Kesimi</span> <span class="price">€10</span></li>
+                <li><span data-i18n="price3Title">Saç + Sakal + Yıkama</span> <span class="price">€20</span></li>
+                <li><span data-i18n="price4Title">Çocuk Tıraşı</span> <span class="price">€12</span></li>
+                <li><span data-i18n="price5Title">Cilt Bakımı (Maske)</span> <span class="price">€5</span></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+        <h2 data-i18n="galleryTitle">Tıraşlarımız</h2>
+        <div class="gallery-grid">
+            <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Haircut 1">
+            <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Haircut 2">
+            <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Haircut 3">
+            <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Haircut 4">
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="booking" class="booking highlighted-booking">
+        <h2 data-i18n="bookingTitle">Randevu Al</h2>
+        <form id="booking-form">
+            <div class="form-group">
+                <label for="service" data-i18n="formServiceLabel">Hizmet Seçin</label>
+                <select id="service" required>
+                    <option value="" disabled selected data-i18n="formServicePlaceholder">Hizmet Seçiniz</option>
+                    <option value="Saç Kesimi" data-i18n="formOption1">Saç Kesimi</option>
+                    <option value="Sakal Tıraşı" data-i18n="formOption2">Sakal Tıraşı</option>
+                    <option value="Saç & Sakal" data-i18n="formOption3">Saç & Sakal</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="date" data-i18n="formDateLabel">Tarih</label>
+                <input type="date" id="date" required>
+            </div>
+            <div class="form-group">
+                <label for="time" data-i18n="formTimeLabel">Saat</label>
+                <div id="time-slots" class="time-grid">
+                    <p class="time-placeholder" data-i18n="timePlaceholder">Lütfen saatleri görmek için önce bir tarih seçin.</p>
+                </div>
+                <input type="hidden" id="selectedTime" required>
+            </div>
+            <div class="form-group">
+                <label for="name" data-i18n="formNameLabel">Adınız Soyadınız</label>
+                <input type="text" id="name" placeholder="Ad Soyad" data-placeholder-i18n="formNamePlaceholder" required>
+            </div>
+            <div class="form-group">
+                <label for="phone" data-i18n="formPhoneLabel">Telefon Numaranız</label>
+                <input type="tel" id="phone" placeholder="05XX XXX XX XX" data-placeholder-i18n="formPhonePlaceholder" required>
+            </div>
+            <button type="submit" class="btn-primary submit-btn pulse-btn" data-i18n="formSubmitBtn">Randevuyu Onayla</button>
+        </form>
+    </section>
+
+    <!-- Contact & Footer -->
+    <section id="contact" class="contact">
+        <div class="contact-info">
+            <h3 data-i18n="contactTitle">İletişim & Adres</h3>
+            <p><strong><span data-i18n="contactAddressLabel">Adres:</span></strong> <span data-i18n="contactAddress">Örnek Mahallesi, Berberler Sokak No: 1, Berlin / Almanya</span></p>
+            <p><strong><span data-i18n="contactPhoneLabel">Telefon:</span></strong> +49 152 000 00 00</p>
+            <p><strong><span data-i18n="contactEmailLabel">E-posta:</span></strong> info@finalebarbershop.com</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Finale Barbershop. <span data-i18n="footerRights">Tüm hakları saklıdır.</span></p>
+        <div class="admin-link">
+            <a href="admin.html" data-i18n="adminLink">Yönetici Girişi</a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

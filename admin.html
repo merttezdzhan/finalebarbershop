@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finale Barbershop | Yönetici Paneli</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        .admin-container {
+            max-width: 1000px;
+            margin: 4rem auto;
+            padding: 0 5%;
+        }
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 1rem;
+        }
+        .appointments-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--bg-card);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .appointments-table th, .appointments-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .appointments-table th {
+            background-color: rgba(0,0,0,0.2);
+            color: var(--primary-gold);
+            font-weight: 600;
+        }
+        .appointments-table tr:hover {
+            background-color: rgba(255,255,255,0.02);
+        }
+        .status-badge {
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background-color: #3a3a3a;
+        }
+        .status-badge.bekliyor {
+            background-color: #856404;
+            color: #fff3cd;
+        }
+        .btn-small {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.85rem;
+            margin-right: 0.5rem;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+        }
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">Finale<span>Barbershop</span> <span style="font-size: 1rem; color: #fff;">| Admin</span></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Siteye Dön</a></li>
+        </ul>
+    </nav>
+
+    <!-- Admin Panel -->
+    <div class="admin-container">
+        <div class="admin-header">
+            <h2>Randevu Listesi</h2>
+        </div>
+        
+        <table class="appointments-table">
+            <thead>
+                <tr>
+                    <th>Tarih & Saat</th>
+                    <th>Müşteri</th>
+                    <th>Telefon</th>
+                    <th>Hizmet</th>
+                    <th>Durum</th>
+                    <th>İşlem</th>
+                </tr>
+            </thead>
+            <tbody id="appointments-body">
+                <!-- Data will be populated here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
