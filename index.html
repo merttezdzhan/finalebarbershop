@@ -1,136 +1,601 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="title">Finale Barbershop | Randevu Al</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#0a0b0e">
+    <meta name="description" content="Finale Barbershop in M&ouml;rfelden-Walldorf - Professionelle Herrenhaarschnitte, Fades und pr&auml;zise Bartpflege. Besuche mit und ohne Termin in der Westendstra&szlig;e 3.">
+    <title data-i18n="docTitle">Finale Barbershop | M&ouml;rfelden-Walldorf</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="logo">Finale<span>Barbershop</span></div>
-        <ul class="nav-links">
-            <li><a href="#home" data-i18n="navHome">Ana Sayfa</a></li>
-            <li><a href="#services" data-i18n="navServices">Hizmetler</a></li>
-            <li><a href="#gallery" data-i18n="navGallery">Galeri</a></li>
-            <li><a href="#contact" data-i18n="navContact">İletişim</a></li>
-            <li><a href="#booking" class="btn-primary" data-i18n="navBooking">Randevu Al</a></li>
-            <li>
-                <select id="languageSelector" onchange="changeLanguage(this.value)">
-                    <option value="tr">TR</option>
-                    <option value="en">EN</option>
-                    <option value="de">DE</option>
-                </select>
-            </li>
-        </ul>
-    </nav>
 
-    <!-- Hero Section -->
-    <header id="home" class="hero">
-        <div class="hero-content">
-            <h1 data-i18n="heroTitle">Tarzınızı Yeniden Keşfedin</h1>
-            <p data-i18n="heroSubtitle">Premium bakım deneyimi için yerinizi hemen ayırtın.</p>
-            <a href="#booking" class="btn-primary large pulse-btn" data-i18n="heroBtn">Hemen Randevu Al</a>
-        </div>
+    <!-- Header / Navbar -->
+    <header class="site-header">
+        <nav class="navbar">
+            <a href="#home" class="logo">
+                <img src="logo.png" alt="Finale Barbershop Logo" class="site-logo-img">
+                <span class="logo-text">FINALE <span class="logo-sub">BARBERSHOP</span></span>
+            </a>
+
+            <div class="nav-menu" id="navMenu">
+                <ul class="nav-links">
+                    <li><a href="#home" class="nav-link active" data-i18n="navHome">Startseite</a></li>
+                    <li><a href="#about" class="nav-link" data-i18n="navAbout">&Uuml;ber Uns</a></li>
+                    <li><a href="#services" class="nav-link" data-i18n="navServices">Preise &amp; Pakete</a></li>
+                    <li><a href="#contact" class="nav-link" data-i18n="navContact">Kontakt &amp; Anfahrt</a></li>
+                </ul>
+
+                <div class="nav-actions">
+                    <!-- Language Selector -->
+                    <div class="lang-selector">
+                        <i class="fa-solid fa-globe lang-icon"></i>
+                        <select id="languageSelector" onchange="changeLanguage(this.value)">
+                            <option value="de">DE</option>
+                            <option value="tr">TR</option>
+                            <option value="en">EN</option>
+                        </select>
+                    </div>
+
+                    <a href="#booking" class="btn btn-primary" data-i18n="navBookBtn">
+                        <i class="fa-regular fa-calendar-check"></i> Termin Buchen
+                    </a>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Men&uuml; &ouml;ffnen">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </nav>
     </header>
 
-    <!-- Services & Pricing Section -->
-    <section id="services" class="services">
-        <h2 data-i18n="servicesTitle">Hizmetlerimiz & Fiyatlar</h2>
-        
-        <div class="service-cards">
-            <div class="card" onclick="selectService('Saç Kesimi')">
-                <h3 data-i18n="service1Title">Saç Kesimi</h3>
-                <p data-i18n="service1Desc">Modern ve klasik saç kesimleri.</p>
-            </div>
-            <div class="card" onclick="selectService('Sakal Tıraşı')">
-                <h3 data-i18n="service2Title">Sakal Tıraşı</h3>
-                <p data-i18n="service2Desc">Özel bakım ürünleri ile sakal şekillendirme.</p>
-            </div>
-            <div class="card" onclick="selectService('Saç & Sakal')">
-                <h3 data-i18n="service3Title">Saç & Sakal</h3>
-                <p data-i18n="service3Desc">Tam kapsamlı premium bakım.</p>
-            </div>
-        </div>
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero-section">
+            <div class="hero-bg-overlay"></div>
+            <div class="hero-container">
+                <div class="hero-content text-center">
+                    <div class="hero-logo-wrapper">
+                        <img src="logo.png" alt="Finale Barbershop" class="hero-logo-img">
+                    </div>
 
-        <div class="pricing-table">
-            <h3 data-i18n="priceListTitle">Fiyat Listesi</h3>
-            <ul>
-                <li><span data-i18n="price1Title">Sadece Saç Kesimi</span> <span class="price">€15</span></li>
-                <li><span data-i18n="price2Title">Sadece Sakal Kesimi</span> <span class="price">€10</span></li>
-                <li><span data-i18n="price3Title">Saç + Sakal + Yıkama</span> <span class="price">€20</span></li>
-                <li><span data-i18n="price4Title">Çocuk Tıraşı</span> <span class="price">€12</span></li>
-                <li><span data-i18n="price5Title">Cilt Bakımı (Maske)</span> <span class="price">€5</span></li>
-            </ul>
-        </div>
-    </section>
+                    <div class="hero-badges">
+                        <span class="badge badge-gold"><i class="fa-solid fa-location-dot"></i> M&ouml;rfelden-Walldorf</span>
+                        <span class="badge badge-glass"><i class="fa-solid fa-bolt"></i> <span data-i18n="walkInBadge">Ohne Termin m&ouml;glich</span></span>
+                    </div>
 
-    <!-- Gallery Section -->
-    <section id="gallery" class="gallery">
-        <h2 data-i18n="galleryTitle">Tıraşlarımız</h2>
-        <div class="gallery-grid">
-            <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Haircut 1">
-            <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Haircut 2">
-            <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Haircut 3">
-            <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Haircut 4">
-        </div>
-    </section>
+                    <h1 class="hero-title" data-i18n="heroTitle">
+                        Perfekter Cut &amp; <span class="gold-gradient">Pr&auml;zise Bartpflege</span>
+                    </h1>
 
-    <!-- Booking Section -->
-    <section id="booking" class="booking highlighted-booking">
-        <h2 data-i18n="bookingTitle">Randevu Al</h2>
-        <form id="booking-form">
-            <div class="form-group">
-                <label for="service" data-i18n="formServiceLabel">Hizmet Seçin</label>
-                <select id="service" required>
-                    <option value="" disabled selected data-i18n="formServicePlaceholder">Hizmet Seçiniz</option>
-                    <option value="Saç Kesimi" data-i18n="formOption1">Saç Kesimi</option>
-                    <option value="Sakal Tıraşı" data-i18n="formOption2">Sakal Tıraşı</option>
-                    <option value="Saç & Sakal" data-i18n="formOption3">Saç & Sakal</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="date" data-i18n="formDateLabel">Tarih</label>
-                <input type="date" id="date" required>
-            </div>
-            <div class="form-group">
-                <label for="time" data-i18n="formTimeLabel">Saat</label>
-                <div id="time-slots" class="time-grid">
-                    <p class="time-placeholder" data-i18n="timePlaceholder">Lütfen saatleri görmek için önce bir tarih seçin.</p>
+                    <p class="hero-subtitle" data-i18n="heroSubtitle">
+                        Willkommen bei Finale Barbershop in M&ouml;rfelden-Walldorf. Wir bieten Ihnen professionelle Herrenhaarschnitte, moderne Fades und erstklassiges Styling in entspannter Atmosph&auml;re.
+                    </p>
+
+                    <div class="hero-buttons">
+                        <a href="#booking" class="btn btn-primary btn-lg pulse-glow" data-i18n="heroBookBtn">
+                            <i class="fa-regular fa-calendar-check"></i> Online Termin Buchen
+                        </a>
+                        <a href="tel:015251649190" class="btn btn-outline btn-lg">
+                            <i class="fa-solid fa-phone"></i> 0152 5164 9190
+                        </a>
+                        <a href="https://www.instagram.com/finale.barbershop/" target="_blank" rel="noopener" class="btn btn-instagram btn-lg" aria-label="Instagram">
+                            <i class="fa-brands fa-instagram"></i> Instagram
+                        </a>
+                    </div>
+
+                    <!-- Quick Info Stats -->
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <i class="fa-solid fa-scissors stat-icon"></i>
+                            <div>
+                                <h4 data-i18n="stat1Title">Professionelle Fades</h4>
+                                <p data-i18n="stat1Sub">&Uuml;berg&auml;nge &amp; Styles</p>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fa-solid fa-user-clock stat-icon"></i>
+                            <div>
+                                <h4 data-i18n="stat2Title">Ohne Termin</h4>
+                                <p data-i18n="stat2Sub">Einfach vorbeikommen</p>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fa-solid fa-star stat-icon"></i>
+                            <div>
+                                <h4>Westendstra&szlig;e 3</h4>
+                                <p>64546 M&ouml;rfelden-Walldorf</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <input type="hidden" id="selectedTime" required>
             </div>
-            <div class="form-group">
-                <label for="name" data-i18n="formNameLabel">Adınız Soyadınız</label>
-                <input type="text" id="name" placeholder="Ad Soyad" data-placeholder-i18n="formNamePlaceholder" required>
-            </div>
-            <div class="form-group">
-                <label for="phone" data-i18n="formPhoneLabel">Telefon Numaranız</label>
-                <input type="tel" id="phone" placeholder="05XX XXX XX XX" data-placeholder-i18n="formPhonePlaceholder" required>
-            </div>
-            <button type="submit" class="btn-primary submit-btn pulse-btn" data-i18n="formSubmitBtn">Randevuyu Onayla</button>
-        </form>
-    </section>
+        </section>
 
-    <!-- Contact & Footer -->
-    <section id="contact" class="contact">
-        <div class="contact-info">
-            <h3 data-i18n="contactTitle">İletişim & Adres</h3>
-            <p><strong><span data-i18n="contactAddressLabel">Adres:</span></strong> <span data-i18n="contactAddress">Örnek Mahallesi, Berberler Sokak No: 1, Berlin / Almanya</span></p>
-            <p><strong><span data-i18n="contactPhoneLabel">Telefon:</span></strong> +49 152 000 00 00</p>
-            <p><strong><span data-i18n="contactEmailLabel">E-posta:</span></strong> info@finalebarbershop.com</p>
-        </div>
-    </section>
+        <!-- Business Status & Hours Bar -->
+        <section class="status-bar-section">
+            <div class="container">
+                <div class="status-bar-card glass-panel">
+                    <div class="status-indicator-box">
+                        <div class="status-dot-wrapper">
+                            <span class="status-dot" id="statusDot"></span>
+                        </div>
+                        <div class="status-text">
+                            <span class="status-label" id="statusLabel" data-i18n="statusChecking">Status wird gepr&uuml;ft...</span>
+                            <span class="status-sub" id="statusSub">Westendstra&szlig;e 3, M&ouml;rfelden-Walldorf</span>
+                        </div>
+                    </div>
 
-    <footer>
-        <p>&copy; 2026 Finale Barbershop. <span data-i18n="footerRights">Tüm hakları saklıdır.</span></p>
-        <div class="admin-link">
-            <a href="admin.html" data-i18n="adminLink">Yönetici Girişi</a>
+                    <div class="hours-quick-summary">
+                        <div class="hours-chip">
+                            <span class="day-name" data-i18n="hoursMonFri">Mo - Fr:</span>
+                            <span class="time-range" id="dispTimeMonFri">09:00 &ndash; 19:00 Uhr</span>
+                        </div>
+                        <div class="hours-chip">
+                            <span class="day-name" data-i18n="hoursSat">Samstag:</span>
+                            <span class="time-range" id="dispTimeSat">09:00 &ndash; 18:00 Uhr</span>
+                        </div>
+                        <div class="hours-chip closed">
+                            <span class="day-name" data-i18n="hoursSun">Sonntag:</span>
+                            <span class="time-range" data-i18n="hoursClosed">Geschlossen</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section">
+            <div class="container">
+                <div class="about-card glass-panel">
+                    <div class="section-header text-center">
+                        <div class="section-tag" data-i18n="aboutTag">&Uuml;BER UNSEREN SALON</div>
+                        <h2 class="section-title" data-i18n="aboutTitle">Finale Barbershop &ndash; Tradition trifft auf modernen Style</h2>
+                        <p class="about-description" data-i18n="aboutDesc1" style="max-width: 800px; margin: 0 auto 1.5rem auto;">
+                            In der Westendstra&szlig;e 3 in M&ouml;rfelden-Walldorf bieten wir mehr als nur Haarschnitte &ndash; wir bieten ein erstklassiges Pflegeritual f&uuml;r den modernen Mann.
+                        </p>
+                        <p class="about-description" data-i18n="aboutDesc2" style="max-width: 800px; margin: 0 auto;">
+                            Egal ob pr&auml;ziser Skin Fade, klassischer Faconschnitt oder konturenscharfe Bartpflege mit Hot-Towel Behandlung: Bei uns stehen h&ouml;chste Pr&auml;zision und Ihre Kundenzufriedenheit an erster Stelle.
+                        </p>
+                    </div>
+
+                    <div class="features-grid-3">
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fa-solid fa-scissors"></i></div>
+                            <div class="feature-info">
+                                <h3 data-i18n="feat1Title">Pr&auml;zise Fades &amp; Schnitte</h3>
+                                <p data-i18n="feat1Desc">Saubere &Uuml;berg&auml;nge ma&szlig;geschneidert auf Ihre Kopfform.</p>
+                            </div>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fa-solid fa-spa"></i></div>
+                            <div class="feature-info">
+                                <h3 data-i18n="feat2Title">Traditionelle Bartpflege</h3>
+                                <p data-i18n="feat2Desc">Rasur, Konturen und wohltuende Pflegeprodukte.</p>
+                            </div>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fa-solid fa-door-open"></i></div>
+                            <div class="feature-info">
+                                <h3 data-i18n="feat3Title">Spontan oder mit Termin</h3>
+                                <p data-i18n="feat3Desc">Online buchen, anrufen oder einfach vorbeikommen.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services & Pricing Section -->
+        <section id="services" class="services-section">
+            <div class="container">
+                <div class="section-header text-center">
+                    <div class="section-tag" data-i18n="servicesTag">ANGEBOT &amp; LEISTUNGEN</div>
+                    <h2 class="section-title" data-i18n="servicesTitle">Unsere Preise &amp; Spezial-Pakete</h2>
+                    <p class="section-subtitle" data-i18n="servicesSub">Erstklassige Qualit&auml;t zu fairen Preisen. W&auml;hlen Sie Ihre gew&uuml;nschte Leistung oder eines unserer Spar-Pakete.</p>
+                </div>
+
+                <!-- Special Packages Grid (Paket 1, Paket 2, Paket 3) -->
+                <div class="packages-header text-center" style="margin-bottom: 2rem;">
+                    <h3 class="gold-gradient" style="font-size: 1.6rem; font-weight: 800;" data-i18n="packagesTitle">Spezial Spar-Pakete</h3>
+                </div>
+
+                <div class="services-cards-grid packages-grid">
+                    <!-- Paket 1 -->
+                    <div class="service-card glass-panel" onclick="quickSelectService('Paket 1')">
+                        <div class="service-badge gold" data-i18n="pkg1Badge">SPAR PAKET</div>
+                        <div class="service-icon"><i class="fa-solid fa-scissors"></i></div>
+                        <h3 class="service-name" data-i18n="pkg1Title">Paket 1</h3>
+                        <p class="service-desc" data-i18n="pkg1Desc">Waschen, Schneiden, Rasieren, F&ouml;hnen &amp; Stylen</p>
+                        <div class="service-footer">
+                            <span class="service-price">33&euro;</span>
+                            <button class="btn btn-sm btn-outline" data-i18n="selectServiceBtn">W&auml;hlen &amp; Buchen</button>
+                        </div>
+                    </div>
+
+                    <!-- Paket 2 (Featured) -->
+                    <div class="service-card glass-panel featured-service" onclick="quickSelectService('Paket 2')">
+                        <div class="service-badge gold" data-i18n="pkg2Badge">BELIEBT</div>
+                        <div class="service-icon"><i class="fa-solid fa-crown"></i></div>
+                        <h3 class="service-name" data-i18n="pkg2Title">Paket 2</h3>
+                        <p class="service-desc" data-i18n="pkg2Desc">Waschen, Schneiden, Rasieren, F&ouml;hnen, Stylen &amp; Augenbrauen zupfen</p>
+                        <div class="service-footer">
+                            <span class="service-price">38&euro;</span>
+                            <button class="btn btn-sm btn-primary" data-i18n="selectServiceBtn">W&auml;hlen &amp; Buchen</button>
+                        </div>
+                    </div>
+
+                    <!-- Paket 3 (VIP) -->
+                    <div class="service-card glass-panel" onclick="quickSelectService('Paket 3')">
+                        <div class="service-badge gold" data-i18n="pkg3Badge">FULL CARE</div>
+                        <div class="service-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                        <h3 class="service-name" data-i18n="pkg3Title">Paket 3</h3>
+                        <p class="service-desc" data-i18n="pkg3Desc">Waschen, Schneiden, Rasieren, F&ouml;hnen, Stylen, Augenbrauen zupfen, F&auml;rben (Bart / Haare)</p>
+                        <div class="service-footer">
+                            <span class="service-price">60&euro;</span>
+                            <button class="btn btn-sm btn-outline" data-i18n="selectServiceBtn">W&auml;hlen &amp; Buchen</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Complete Individual Price List Table (7 items) -->
+                <div class="price-list-container glass-panel">
+                    <h3 class="price-table-title" data-i18n="fullPriceTitle"><i class="fa-solid fa-list"></i> Einzelne Leistungen &amp; Preise</h3>
+                    <div class="price-items-grid">
+                        <div class="price-item" onclick="quickSelectService('Trocken Haarschnitt')" style="cursor:pointer;">
+                            <div class="price-info">
+                                <span class="price-title" data-i18n="p1Name">Trocken Haarschnitt</span>
+                                <span class="price-sub" data-i18n="p1Sub">Klassischer oder moderner Trockenschnitt</span>
+                            </div>
+                            <span class="price-tag">18&euro;</span>
+                        </div>
+                        <div class="price-item" onclick="quickSelectService('Waschen, Schneiden, F&ouml;hnen')" style="cursor:pointer;">
+                            <div class="price-info">
+                                <span class="price-title" data-i18n="p2Name">Waschen, Schneiden, F&ouml;hnen</span>
+                                <span class="price-sub" data-i18n="p2Sub">Inklusive Haarw&auml;sche, Schnitt und F&ouml;hnen</span>
+                            </div>
+                            <span class="price-tag">21&euro;</span>
+                        </div>
+                        <div class="price-item" onclick="quickSelectService('Bartrasur')" style="cursor:pointer;">
+                            <div class="price-info">
+                                <span class="price-title" data-i18n="p3Name">Bartrasur</span>
+                                <span class="price-sub" data-i18n="p3Sub">Pr&auml;zisionsrasur und Konturenformung</span>
+                            </div>
+                            <span class="price-tag">12&euro;</span>
+                        </div>
+                        <div class="price-item" onclick="quickSelectService('Augenbrauen zupfen')" style="cursor:pointer;">
+                            <div class="price-info">
+                                <span class="price-title" data-i18n="p4Name">Augenbrauen zupfen</span>
+                                <span class="price-sub" data-i18n="p4Sub">Pr&auml;zises Zupfen &amp; Formgebung</span>
+                            </div>
+                            <span class="price-tag">7&euro;</span>
+                        </div>
+                        <div class="price-item" onclick="quickSelectService('Kinder Haarschnitt')" style="cursor:pointer;">
+                            <div class="price-info">
+                                <span class="price-title" data-i18n="p5Name">Kinder Haarschnitt (bis 10 Jahre)</span>
+                                <span class="price-sub" data-i18n="p5Sub">Geduldiger &amp; moderner Schnitt f&uuml;r Kinder</span>
+                            </div>
+                            <span class="price-tag">15&euro;</span>
+                        </div>
+                        <div class="price-item" onclick="quickSelectService('Waschen, F&ouml;hnen, Stylen')" style="cursor:pointer;">
+                            <div class="price-info">
+                                <span class="price-title" data-i18n="p6Name">Waschen, F&ouml;hnen, Stylen</span>
+                                <span class="price-sub" data-i18n="p6Sub">Haarw&auml;sche, F&ouml;hnen und Finish-Styling</span>
+                            </div>
+                            <span class="price-tag">7&euro;</span>
+                        </div>
+                        <div class="price-item" onclick="quickSelectService('Bart / Haare F&auml;rben')" style="cursor:pointer;">
+                            <div class="price-info">
+                                <span class="price-title" data-i18n="p7Name">Bart / Haare F&auml;rben</span>
+                                <span class="price-sub" data-i18n="p7Sub">Professionelle T&ouml;nung &amp; F&auml;rbung</span>
+                            </div>
+                            <span class="price-tag">20&euro;</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Booking Section -->
+        <section id="booking" class="booking-section">
+            <div class="container">
+                <div class="booking-wrapper glass-panel">
+                    <div class="booking-header text-center">
+                        <div class="section-tag" data-i18n="bookingTag">ONLINE RESERVIERUNG</div>
+                        <h2 class="section-title" data-i18n="bookingTitle">Wunschtermin Vereinbaren</h2>
+                        <p class="section-subtitle" data-i18n="bookingSub">W&auml;hlen Sie Ihren Barber, Datum und Uhrzeit aus. Sie erhalten sofort einen Sicherheitscode.</p>
+                    </div>
+
+                    <!-- Salon Closed Dynamic Alert Banner -->
+                    <div id="salonClosedNotice" class="salon-closed-banner" style="display:none;">
+                        <i class="fa-solid fa-store-slash"></i>
+                        <div>
+                            <strong data-i18n="salonClosedTitle">Salon ist derzeit geschlossen</strong>
+                            <p data-i18n="salonClosedDesc">Derzeit k&ouml;nnen online keine Termine vereinbart werden. Bitte rufen Sie uns an oder versuchen Sie es sp&auml;ter erneut.</p>
+                        </div>
+                    </div>
+
+                    <form id="booking-form" class="booking-form">
+                        <div class="form-grid">
+
+                            <!-- Barber Selection Cards -->
+                            <div class="form-group full-width">
+                                <label><i class="fa-solid fa-user-tie"></i> <span data-i18n="lblBarber">W&auml;hlen Sie Ihren Barber</span></label>
+                                <div class="barber-selection-grid">
+                                    <div class="barber-card active" id="barberBahattin" onclick="selectBarber('Bahattin')">
+                                        <div class="barber-avatar"><i class="fa-solid fa-scissors"></i></div>
+                                        <div class="barber-info">
+                                            <h4>Bahattin</h4>
+                                            <span data-i18n="barber1Role">Usta Berber / Master Stylist</span>
+                                        </div>
+                                        <i class="fa-solid fa-circle-check barber-check-icon"></i>
+                                    </div>
+                                    <div class="barber-card" id="barberTeam" onclick="selectBarber('Finale Barber Team')">
+                                        <div class="barber-avatar"><i class="fa-solid fa-users"></i></div>
+                                        <div class="barber-info">
+                                            <h4>Finale Barber Team</h4>
+                                            <span data-i18n="barber2Role">N&auml;chster freier Barber</span>
+                                        </div>
+                                        <i class="fa-solid fa-circle-check barber-check-icon"></i>
+                                    </div>
+                                </div>
+                                <input type="hidden" id="selectedBarber" value="Bahattin" required>
+                            </div>
+
+                            <!-- Service Select -->
+                            <div class="form-group">
+                                <label for="serviceSelect">
+                                    <i class="fa-solid fa-scissors"></i> <span data-i18n="lblService">Gew&uuml;nschte Leistung</span>
+                                </label>
+                                <select id="serviceSelect" class="form-control" required>
+                                    <option value="" disabled selected data-i18n="phSelectService">Bitte Leistung w&auml;hlen...</option>
+                                    <optgroup label="Spezial-Pakete">
+                                        <option value="Paket 1: Waschen, Schneiden, Rasieren, F&ouml;hnen &amp; Stylen (33&euro;)">Paket 1 - Waschen, Schneiden, Rasieren, F&ouml;hnen &amp; Stylen (33&euro;)</option>
+                                        <option value="Paket 2: Waschen, Schneiden, Rasieren, F&ouml;hnen, Stylen &amp; Augenbrauen (38&euro;)">Paket 2 - Waschen, Schneiden, Rasieren, F&ouml;hnen, Stylen &amp; Augenbrauen (38&euro;)</option>
+                                        <option value="Paket 3: Waschen, Schneiden, Rasieren, F&ouml;hnen, Stylen, Augenbrauen, F&auml;rben (60&euro;)">Paket 3 - Komplett + F&auml;rben (Bart/Haare) (60&euro;)</option>
+                                    </optgroup>
+                                    <optgroup label="Einzelne Leistungen">
+                                        <option value="Trocken Haarschnitt (18&euro;)">Trocken Haarschnitt (18&euro;)</option>
+                                        <option value="Waschen, Schneiden, F&ouml;hnen (21&euro;)">Waschen, Schneiden, F&ouml;hnen (21&euro;)</option>
+                                        <option value="Bartrasur (12&euro;)">Bartrasur (12&euro;)</option>
+                                        <option value="Augenbrauen zupfen (7&euro;)">Augenbrauen zupfen (7&euro;)</option>
+                                        <option value="Kinder Haarschnitt bis 10 Jahre (15&euro;)">Kinder Haarschnitt bis 10 Jahre (15&euro;)</option>
+                                        <option value="Waschen, F&ouml;hnen, Stylen (7&euro;)">Waschen, F&ouml;hnen, Stylen (7&euro;)</option>
+                                        <option value="Bart / Haare F&auml;rben (20&euro;)">Bart / Haare F&auml;rben (20&euro;)</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+
+                            <!-- Date Picker (Past dates blocked) -->
+                            <div class="form-group">
+                                <label for="bookingDate">
+                                    <i class="fa-regular fa-calendar-days"></i> <span data-i18n="lblDate">Datum W&auml;hlen</span>
+                                </label>
+                                <input type="date" id="bookingDate" class="form-control" required>
+                                <small class="form-help-text" data-i18n="dateHelp">Sonntags ist der Salon geschlossen.</small>
+                            </div>
+
+                            <!-- Time Slot Selection Grid (Past hours blocked automatically) -->
+                            <div class="form-group full-width">
+                                <label>
+                                    <i class="fa-regular fa-clock"></i> <span data-i18n="lblTime">Freie Uhrzeit Ausw&auml;hlen</span>
+                                </label>
+                                <div id="timeSlotsContainer" class="time-slots-grid">
+                                    <div class="slots-placeholder">
+                                        <i class="fa-solid fa-calendar-day"></i>
+                                        <p data-i18n="timeSlotPlaceholder">Bitte w&auml;hlen Sie zuerst oben ein Datum aus, um die verf&uuml;gbaren Zeiten zu sehen.</p>
+                                    </div>
+                                </div>
+                                <input type="hidden" id="selectedTimeSlot" required>
+                            </div>
+
+                            <!-- Customer Name -->
+                            <div class="form-group">
+                                <label for="customerName">
+                                    <i class="fa-regular fa-user"></i> <span data-i18n="lblName">Ihr Vor- &amp; Nachname</span>
+                                </label>
+                                <input type="text" id="customerName" class="form-control" placeholder="z.B. Max Mustermann" data-ph-i18n="phName" required>
+                            </div>
+
+                            <!-- Customer Phone -->
+                            <div class="form-group">
+                                <label for="customerPhone">
+                                    <i class="fa-solid fa-phone"></i> <span data-i18n="lblPhone">Telefonnummer</span>
+                                </label>
+                                <input type="tel" id="customerPhone" class="form-control" placeholder="z.B. 0152 5164 9190" data-ph-i18n="phPhone" required>
+                            </div>
+
+                            <!-- Customer Email (for booking code confirmation) -->
+                            <div class="form-group full-width">
+                                <label for="customerEmail">
+                                    <i class="fa-regular fa-envelope"></i> <span data-i18n="lblEmail">E-Mail Adresse (F&uuml;r Best&auml;tigungscode)</span>
+                                </label>
+                                <input type="email" id="customerEmail" class="form-control" placeholder="z.B. max.mustermann@gmail.com" data-ph-i18n="phEmail" required>
+                                <small class="form-help-text" data-i18n="emailHelp">Terminbest&auml;tigung und Ihr 6-stelliger Code werden an diese E-Mail gesendet.</small>
+                            </div>
+
+                            <!-- Customer Notes Optional -->
+                            <div class="form-group full-width">
+                                <label for="customerNotes">
+                                    <i class="fa-regular fa-note-sticky"></i> <span data-i18n="lblNotes">Anmerkungen (Optional)</span>
+                                </label>
+                                <input type="text" id="customerNotes" class="form-control" placeholder="z.B. Besondere W&uuml;nsche..." data-ph-i18n="phNotes">
+                            </div>
+                        </div>
+
+                        <div class="form-actions text-center">
+                            <button type="submit" class="btn btn-primary btn-xl pulse-glow" id="submitBookingBtn">
+                                <i class="fa-solid fa-check-circle"></i> <span data-i18n="btnConfirmBooking">Termin Jetzt Verbindlich Buchen</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Customer Satisfaction & Google Review Section -->
+        <section class="review-invite-section">
+            <div class="container">
+                <div class="review-card glass-panel text-center">
+                    <div class="review-stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <h2 class="review-title" data-i18n="reviewTitle">Waren Sie mit unserem Service zufrieden?</h2>
+                    <p class="review-desc" data-i18n="reviewDesc">
+                        Ihre Zufriedenheit ist unser gr&ouml;&szlig;ter Antrieb! Unterst&uuml;tzen Sie Finale Barbershop mit einer 5-Sterne Bewertung auf Google. Wir freuen uns &uuml;ber Ihr Feedback!
+                    </p>
+                    <div class="review-actions">
+                        <a href="https://maps.google.com/?q=Westendstra??e+3,+64546+M??rfelden-Walldorf" target="_blank" rel="noopener" class="btn btn-primary btn-lg pulse-glow">
+                            <i class="fa-brands fa-google"></i> <span data-i18n="reviewBtn">Auf Google 5 Sterne Bewerten</span>
+                        </a>
+                        <a href="https://www.instagram.com/finale.barbershop/" target="_blank" rel="noopener" class="btn btn-instagram btn-lg">
+                            <i class="fa-brands fa-instagram"></i> Instagram Feedback
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact & Location Section -->
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <div class="contact-grid">
+                    <div class="contact-info-card glass-panel">
+                        <div class="section-tag" data-i18n="contactTag">KONTAKT &amp; STANDORT</div>
+                        <h2 class="contact-title" data-i18n="contactTitle">Besuchen Sie Uns in M&ouml;rfelden-Walldorf</h2>
+                        
+                        <div class="contact-details">
+                            <div class="detail-row">
+                                <div class="detail-icon"><i class="fa-solid fa-location-dot"></i></div>
+                                <div>
+                                    <h4 data-i18n="addrLabel">Adresse</h4>
+                                    <p>Finale Barbershop</p>
+                                    <p>Westendstra&szlig;e 3, 64546 M&ouml;rfelden-Walldorf</p>
+                                </div>
+                            </div>
+
+                            <div class="detail-row">
+                                <div class="detail-icon"><i class="fa-solid fa-phone"></i></div>
+                                <div>
+                                    <h4 data-i18n="phoneLabel">Telefon &amp; Terminvereinbarung</h4>
+                                    <p><a href="tel:015251649190" class="contact-link">0152 5164 9190</a></p>
+                                    <small data-i18n="walkInSub">Besuche auch ohne Termin m&ouml;glich</small>
+                                </div>
+                            </div>
+
+                            <div class="detail-row">
+                                <div class="detail-icon"><i class="fa-brands fa-instagram"></i></div>
+                                <div>
+                                    <h4 data-i18n="instaLabel">Instagram</h4>
+                                    <p><a href="https://www.instagram.com/finale.barbershop/" target="_blank" rel="noopener" class="contact-link">@finale.barbershop</a></p>
+                                    <small data-i18n="instaSub">Termine &amp; Styles auf Instagram</small>
+                                </div>
+                            </div>
+
+                            <div class="detail-row">
+                                <div class="detail-icon"><i class="fa-solid fa-clock"></i></div>
+                                <div>
+                                    <h4 data-i18n="hoursLabel">&Ouml;ffnungszeiten</h4>
+                                    <p><strong>Montag &ndash; Freitag:</strong> <span id="contactMonFri">09:00 &ndash; 19:00 Uhr</span></p>
+                                    <p><strong>Samstag:</strong> <span id="contactSat">09:00 &ndash; 18:00 Uhr</span></p>
+                                    <p><strong>Sonntag:</strong> Geschlossen</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="contact-quick-buttons">
+                            <a href="https://maps.google.com/?q=Westendstra??e+3,+64546+M??rfelden-Walldorf" target="_blank" rel="noopener" class="btn btn-outline">
+                                <i class="fa-solid fa-map-location-dot"></i> Google Maps Route
+                            </a>
+                            <a href="https://wa.me/4915251649190" target="_blank" rel="noopener" class="btn btn-whatsapp">
+                                <i class="fa-brands fa-whatsapp"></i> WhatsApp Nachricht
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Google Map Frame -->
+                    <div class="contact-map-wrapper glass-frame">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2564.123456789!2d8.56789!3d49.98765!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bd9a0000000000%3A0x0!2sWestendstra%C3%9Fe%203%2C%2064546%20M%C3%B6rfelden-Walldorf!5e0!3m2!1sde!2sde!4v1700000000000!5m2!1sde!2sde" 
+                            width="100%" 
+                            height="100%" 
+                            style="border:0; filter: invert(90%) hue-rotate(180deg) contrast(120%);" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Finale Barbershop Standorts-Karte">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer with New Logo -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <img src="logo.png" alt="Finale Barbershop Logo" class="footer-logo-img">
+                        <span class="logo-text">FINALE <span class="logo-sub">BARBERSHOP</span></span>
+                    </div>
+                    <p data-i18n="footerTagline">Ihr erstklassiger Herrenfriseur &amp; Barbershop in M&ouml;rfelden-Walldorf.</p>
+                </div>
+
+                <div class="footer-links">
+                    <a href="#home" data-i18n="navHome">Startseite</a>
+                    <a href="#services" data-i18n="navServices">Preise &amp; Pakete</a>
+                    <a href="#booking" data-i18n="navBooking">Termin Buchen</a>
+                    <a href="#contact" data-i18n="navContact">Kontakt</a>
+                </div>
+
+                <div class="footer-admin">
+                    <a href="admin.html" class="admin-badge-btn">
+                        <i class="fa-solid fa-user-gear"></i> <span data-i18n="adminBtn">Y&ouml;netici Paneli</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-bottom text-center">
+                <p>&copy; 2026 Finale Barbershop M&ouml;rfelden-Walldorf. <span data-i18n="allRights">Alle Rechte vorbehalten.</span></p>
+            </div>
         </div>
     </footer>
 
+    <!-- Success Modal with 6-digit Code -->
+    <div id="bookingModal" class="modal-backdrop">
+        <div class="modal-box glass-panel text-center">
+            <div class="modal-icon"><i class="fa-solid fa-circle-check"></i></div>
+            <h3 class="modal-title" data-i18n="modalSuccessTitle">Termin Erfolgreich Reserviert!</h3>
+            
+            <div class="auth-code-container">
+                <span class="auth-code-tag" data-i18n="authCodeTag">IHR PERS&Ouml;NLICHER SICHERHEITSCODE</span>
+                <div class="auth-code-display" id="modalAuthCode">FN-000000</div>
+                <small data-i18n="authCodeHelp">Bitte nennen Sie diesen Code bei Ihrem Besuch im Salon.</small>
+            </div>
+
+            <p class="modal-message" id="modalMessage">Vielen Dank! Wir haben Ihre Reservierung erhalten.</p>
+            <button class="btn btn-primary" onclick="closeBookingModal()" data-i18n="modalCloseBtn">Verstanden</button>
+        </div>
+    </div>
+
+    <!-- JavaScript File -->
     <script src="script.js"></script>
 </body>
 </html>

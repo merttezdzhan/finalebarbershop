@@ -1,110 +1,553 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Finale Barbershop | Yönetici Paneli</title>
+    <title>Finale Barbershop | YÃ¶netici Paneli</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+
     <style>
-        .admin-container {
-            max-width: 1000px;
-            margin: 4rem auto;
-            padding: 0 5%;
-        }
-        .admin-header {
+        /* =============================
+           LOGIN SCREEN
+        ============================= */
+        .login-screen {
+            position: fixed;
+            inset: 0;
+            background: var(--bg-dark);
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 2rem;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 1rem;
+            justify-content: center;
+            z-index: 9999;
+            padding: 1.5rem;
         }
-        .appointments-table {
+
+        .login-card {
+            background: var(--bg-panel);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-gold);
+            border-radius: var(--radius-lg);
+            padding: 3rem 2.5rem;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8), var(--shadow-gold);
+            text-align: center;
+        }
+
+        .login-logo-img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 2px solid var(--primary-gold);
+            object-fit: cover;
+            margin: 0 auto 1.2rem;
+            display: block;
+        }
+
+        .login-subtitle {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .login-title {
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 0.3rem;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            text-align: left;
+        }
+
+        .login-form label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 0.4rem;
+            display: block;
+        }
+
+        .login-form label i {
+            color: var(--primary-gold);
+            margin-right: 0.4rem;
+        }
+
+        .login-error {
+            background: rgba(239, 68, 68, 0.12);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #ef4444;
+            padding: 0.7rem 1rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .login-error.show { display: block; }
+
+        .btn-login {
+            margin-top: 0.5rem;
+            width: 100%;
+            padding: 0.9rem;
+            font-size: 1rem;
+        }
+
+        /* =============================
+           ADMIN DASHBOARD
+        ============================= */
+        .admin-page {
+            padding-top: 6rem;
+            padding-bottom: 4rem;
+            min-height: 100vh;
+        }
+
+        /* Salon Settings Control Card */
+        .salon-management-card {
+            padding: 1.8rem 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-gold);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+        }
+
+        .status-toggle-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+
+        .status-switch-btn {
+            padding: 0.7rem 1.4rem;
+            font-weight: 700;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            transition: var(--transition);
+        }
+
+        .status-switch-btn.open {
+            background: rgba(16, 185, 129, 0.2);
+            border: 1px solid var(--status-open);
+            color: #10b981;
+        }
+
+        .status-switch-btn.closed {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid var(--status-closed);
+            color: #ef4444;
+        }
+
+        .hours-config-box {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .hours-config-box select {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-light);
+            color: #fff;
+            padding: 0.5rem 0.8rem;
+            border-radius: var(--radius-sm);
+            outline: none;
+        }
+
+        .hours-config-box select option {
+            background: #12141a;
+            color: #fff;
+        }
+
+        .admin-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .admin-stat-card {
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+
+        .admin-stat-icon {
+            font-size: 2rem;
+            color: var(--primary-gold);
+            background: rgba(212, 175, 55, 0.1);
+            width: 60px; height: 60px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: var(--radius-sm);
+        }
+
+        .admin-stat-info h3 {
+            font-size: 1.8rem;
+            font-weight: 800;
+        }
+
+        .admin-stat-info p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .admin-controls-bar {
+            padding: 1.5rem;
+            margin-bottom: 1.8rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            align-items: center;
+            flex: 1;
+        }
+
+        .filter-input {
+            max-width: 240px;
+        }
+
+        /* Table */
+        .admin-table-container {
+            overflow-x: auto;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-light);
+            background: var(--bg-card);
+        }
+
+        .admin-table {
             width: 100%;
             border-collapse: collapse;
-            background-color: var(--bg-card);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        .appointments-table th, .appointments-table td {
-            padding: 1rem;
             text-align: left;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 0.92rem;
         }
-        .appointments-table th {
-            background-color: rgba(0,0,0,0.2);
+
+        .admin-table th, .admin-table td {
+            padding: 1rem 1.2rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .admin-table th {
+            background: rgba(255, 255, 255, 0.02);
+            color: var(--text-secondary);
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .admin-table tbody tr:hover {
+            background: rgba(212, 175, 55, 0.03);
+        }
+
+        .code-pill {
+            font-family: var(--font-heading);
+            font-weight: 800;
             color: var(--primary-gold);
-            font-weight: 600;
+            background: rgba(212, 175, 55, 0.12);
+            padding: 0.25rem 0.6rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-gold);
+            display: inline-block;
+            letter-spacing: 1px;
         }
-        .appointments-table tr:hover {
-            background-color: rgba(255,255,255,0.02);
+
+        .barber-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: var(--radius-full);
+            font-size: 0.8rem;
+            font-weight: 700;
         }
+
+        .barber-badge.bahattin {
+            background: rgba(212, 175, 55, 0.15);
+            color: var(--primary-gold);
+            border: 1px solid var(--border-gold);
+        }
+
+        .barber-badge.team {
+            background: rgba(59, 130, 246, 0.15);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
         .status-badge {
-            padding: 0.3rem 0.6rem;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            background-color: #3a3a3a;
+            display: inline-block;
+            padding: 0.25rem 0.6rem;
+            border-radius: var(--radius-full);
+            font-size: 0.78rem;
+            font-weight: 700;
         }
-        .status-badge.bekliyor {
-            background-color: #856404;
-            color: #fff3cd;
+
+        .status-badge.offen {
+            background: rgba(245, 158, 11, 0.15);
+            color: #fbbf24;
+            border: 1px solid rgba(245, 158, 11, 0.3);
         }
-        .btn-small {
-            padding: 0.4rem 0.8rem;
-            font-size: 0.85rem;
-            margin-right: 0.5rem;
-            border-radius: 4px;
-            border: none;
+
+        .status-badge.onaylandi {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .status-badge.iptal {
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 0.4rem;
+        }
+
+        .btn-action {
+            width: 32px; height: 32px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-light);
+            background: rgba(255, 255, 255, 0.03);
+            color: #fff;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             transition: var(--transition);
-            font-weight: 600;
         }
-        .btn-danger {
-            background-color: #dc3545;
-            color: white;
+
+        .btn-action:hover {
+            transform: scale(1.1);
         }
-        .btn-danger:hover {
-            background-color: #c82333;
+
+        .btn-action.confirm:hover {
+            border-color: var(--status-open);
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
         }
-        .empty-state {
-            text-align: center;
-            padding: 3rem;
-            color: var(--text-muted);
+
+        .btn-action.cancel:hover {
+            border-color: #f59e0b;
+            background: rgba(245, 158, 11, 0.2);
+            color: #f59e0b;
+        }
+
+        .btn-action.delete:hover {
+            border-color: var(--status-closed);
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        .sync-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.82rem;
+            color: var(--status-open);
+            background: rgba(16, 185, 129, 0.1);
+            padding: 0.3rem 0.8rem;
+            border-radius: var(--radius-full);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .sync-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 0 8px #10b981;
+            animation: pulseDot 2s infinite;
         }
     </style>
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="logo">Finale<span>Barbershop</span> <span style="font-size: 1rem; color: #fff;">| Admin</span></div>
-        <ul class="nav-links">
-            <li><a href="index.html">Siteye Dön</a></li>
-        </ul>
-    </nav>
 
-    <!-- Admin Panel -->
-    <div class="admin-container">
-        <div class="admin-header">
-            <h2>Randevu Listesi</h2>
+    <!-- LOGIN OVERLAY -->
+    <div id="loginScreen" class="login-screen">
+        <div class="login-card">
+            <img src="logo.png" alt="Finale Barbershop" class="login-logo-img">
+            <h2 class="login-title">Finale Barbershop</h2>
+            <p class="login-subtitle">YÃ¶netici & Berber Kontrol Paneli</p>
+            
+            <form id="loginForm" class="login-form" onsubmit="handleLogin(event)">
+                <div class="login-error" id="loginError">
+                    <i class="fa-solid fa-circle-exclamation"></i> HatalÄ± ÅŸifre girdiniz!
+                </div>
+                <div>
+                    <label for="adminPass"><i class="fa-solid fa-lock"></i> YÃ¶netici Åifresi</label>
+                    <input type="password" id="adminPass" class="form-control" placeholder="Åifrenizi giriniz..." required autofocus>
+                </div>
+                <button type="submit" class="btn btn-primary btn-login">
+                    <i class="fa-solid fa-right-to-bracket"></i> GiriÅŸ Yap
+                </button>
+            </form>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 1.5rem;">VarsayÄ±lan Åifre: <code>finale1234</code></p>
         </div>
-        
-        <table class="appointments-table">
-            <thead>
-                <tr>
-                    <th>Tarih & Saat</th>
-                    <th>Müşteri</th>
-                    <th>Telefon</th>
-                    <th>Hizmet</th>
-                    <th>Durum</th>
-                    <th>İşlem</th>
-                </tr>
-            </thead>
-            <tbody id="appointments-body">
-                <!-- Data will be populated here -->
-            </tbody>
-        </table>
+    </div>
+
+    <!-- MAIN ADMIN INTERFACE -->
+    <div id="adminApp" style="display: none;">
+        <!-- Header -->
+        <header class="site-header">
+            <nav class="navbar">
+                <div class="logo">
+                    <img src="logo.png" alt="Finale Barbershop" class="site-logo-img">
+                    <span class="logo-text">FINALE <span class="logo-sub">YÃ–NETÄ°CÄ° PANELÄ°</span></span>
+                </div>
+                <div class="nav-actions">
+                    <span class="sync-badge">
+                        <span class="sync-dot"></span> CanlÄ± Bulut Senkronizasyonu
+                    </span>
+                    <a href="index.html" class="btn btn-outline btn-sm" target="_blank">
+                        <i class="fa-solid fa-globe"></i> Web Sitesini AÃ§
+                    </a>
+                    <button onclick="handleLogout()" class="btn btn-outline btn-sm">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i> Ã‡Ä±kÄ±ÅŸ Yap
+                    </button>
+                </div>
+            </nav>
+        </header>
+
+        <main class="admin-page">
+            <div class="container">
+
+                <!-- SALON STATUS & WORKING HOURS MANAGEMENT -->
+                <div class="salon-management-card glass-panel">
+                    <div class="status-toggle-wrapper">
+                        <div>
+                            <h4 style="font-size: 1.1rem; margin-bottom: 0.2rem;"><i class="fa-solid fa-store"></i> Salon Ã‡alÄ±ÅŸma Durumu</h4>
+                            <p style="font-size: 0.85rem; color: var(--text-muted);">Sitedeki online randevu alÄ±mÄ±nÄ± aÃ§Ä±p kapatÄ±n.</p>
+                        </div>
+                        <button id="salonToggleBtn" class="status-switch-btn open" onclick="toggleSalonState()">
+                            <i class="fa-solid fa-circle-check" id="salonToggleIcon"></i>
+                            <span id="salonToggleText">SALON AÃ‡IK (Randevu AlÄ±nabilir)</span>
+                        </button>
+                    </div>
+
+                    <div class="hours-config-box">
+                        <label style="font-size: 0.9rem; font-weight: 600; color: var(--text-secondary);">
+                            <i class="fa-regular fa-clock" style="color: var(--primary-gold);"></i> Ã‡alÄ±ÅŸma Saatleri:
+                        </label>
+                        <select id="openHourSelect">
+                            <option value="08:00">08:00</option>
+                            <option value="09:00" selected>09:00</option>
+                            <option value="10:00">10:00</option>
+                        </select>
+                        <span>â€“</span>
+                        <select id="closeHourSelect">
+                            <option value="18:00">18:00</option>
+                            <option value="19:00" selected>19:00</option>
+                            <option value="20:00">20:00</option>
+                            <option value="21:00">21:00</option>
+                        </select>
+                        <button class="btn btn-primary btn-sm" onclick="saveHoursSettings()">
+                            <i class="fa-solid fa-floppy-disk"></i> Saatleri Kaydet
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Statistics Cards -->
+                <div class="admin-stats-grid">
+                    <div class="admin-stat-card glass-panel">
+                        <div class="admin-stat-icon"><i class="fa-solid fa-calendar-check"></i></div>
+                        <div class="admin-stat-info">
+                            <h3 id="statTotal">0</h3>
+                            <p>Toplam Randevu</p>
+                        </div>
+                    </div>
+                    <div class="admin-stat-card glass-panel">
+                        <div class="admin-stat-icon" style="color: #fbbf24; background: rgba(245, 158, 11, 0.1);"><i class="fa-solid fa-clock"></i></div>
+                        <div class="admin-stat-info">
+                            <h3 id="statPending">0</h3>
+                            <p>Onay Bekleyen</p>
+                        </div>
+                    </div>
+                    <div class="admin-stat-card glass-panel">
+                        <div class="admin-stat-icon" style="color: #34d399; background: rgba(16, 185, 129, 0.1);"><i class="fa-solid fa-circle-check"></i></div>
+                        <div class="admin-stat-info">
+                            <h3 id="statConfirmed">0</h3>
+                            <p>Onaylanan Randevu</p>
+                        </div>
+                    </div>
+                    <div class="admin-stat-card glass-panel">
+                        <div class="admin-stat-icon" style="color: var(--primary-gold);"><i class="fa-solid fa-scissors"></i></div>
+                        <div class="admin-stat-info">
+                            <h3 id="statBahattin">0</h3>
+                            <p>Bahattin RandevularÄ±</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Controls & Filters -->
+                <div class="admin-controls-bar glass-panel">
+                    <div class="filter-group">
+                        <input type="text" id="searchInput" class="form-control filter-input" placeholder="ğŸ” MÃ¼ÅŸteri, Kod, Tel Ara..." oninput="filterAppointments()">
+                        <select id="barberFilter" class="form-control filter-input" onchange="filterAppointments()">
+                            <option value="all">TÃ¼m Berberler</option>
+                            <option value="Bahattin">Bahattin</option>
+                            <option value="Finale Barber Team">Finale Ekibi</option>
+                        </select>
+                        <select id="statusFilter" class="form-control filter-input" onchange="filterAppointments()">
+                            <option value="all">TÃ¼m Durumlar</option>
+                            <option value="Offen">Bekleyen (Offen)</option>
+                            <option value="OnaylandÄ±">OnaylandÄ±</option>
+                            <option value="Ä°ptal Edildi">Ä°ptal Edildi</option>
+                        </select>
+                    </div>
+                    <div style="display: flex; gap: 0.6rem;">
+                        <button class="btn btn-outline btn-sm" onclick="syncAllFromCloud(true)">
+                            <i class="fa-solid fa-rotate"></i> Yenile
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Appointments Table -->
+                <div class="admin-table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Tarih & Saat</th>
+                                <th>GÃ¼venlik Kodu</th>
+                                <th>Berber</th>
+                                <th>MÃ¼ÅŸteri Bilgileri</th>
+                                <th>E-Mail</th>
+                                <th>Hizmet & Not</th>
+                                <th>Durum</th>
+                                <th>Ä°ÅŸlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody id="appointmentsTableBody">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </main>
     </div>
 
     <script src="admin.js"></script>
