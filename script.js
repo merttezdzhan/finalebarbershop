@@ -1,5 +1,5 @@
 // ==========================================================================
-// FINALE BARBERSHOP - CLIENT JAVASCRIPT (V8 DYNAMIC SEPARATE CALENDARS)
+// FINALE BARBERSHOP - CLIENT JAVASCRIPT (V9 DYNAMIC SEPARATE CALENDARS)
 // ==========================================================================
 
 const BARBER_EMAIL = "Habapli7@gmail.com";
@@ -398,7 +398,7 @@ function selectBarber(barberName) {
 
     const bBahattin = document.getElementById('barberBahattin');
     const bTeam = document.getElementById('barberTeam');
-    const badge = document.getElementById('r8BarberLiveName');
+    const badge = document.getElementById('atelierBarberLiveName');
 
     if (barberName.includes('Bahattin')) {
         if (bBahattin) bBahattin.classList.add('selected');
@@ -418,19 +418,26 @@ function selectBarber(barberName) {
     }
 }
 
-// --- Quick Select from Service Cards ---
+// --- Sync Service Radio Choice to Hidden Input ---
+function syncServiceChoice(serviceVal) {
+    const hiddenService = document.getElementById('serviceSelect');
+    if (hiddenService) hiddenService.value = serviceVal;
+}
+
+// --- Quick Select from Service Cards in Page ---
 function quickSelectService(serviceIdentifier) {
-    const serviceSelect = document.getElementById('serviceSelect');
-    if (serviceSelect) {
-        const query = serviceIdentifier.toLowerCase();
-        for (let i = 0; i < serviceSelect.options.length; i++) {
-            const opt = serviceSelect.options[i];
-            if (opt.value && (opt.value.toLowerCase().includes(query) || opt.text.toLowerCase().includes(query))) {
-                serviceSelect.selectedIndex = i;
-                break;
-            }
+    const hiddenService = document.getElementById('serviceSelect');
+    const radios = document.querySelectorAll('input[name="serviceOption"]');
+    const query = serviceIdentifier.toLowerCase();
+
+    for (let r of radios) {
+        if (r.value.toLowerCase().includes(query)) {
+            r.checked = true;
+            if (hiddenService) hiddenService.value = r.value;
+            break;
         }
     }
+
     const bookingSection = document.getElementById('booking');
     if (bookingSection) {
         bookingSection.scrollIntoView({ behavior: 'smooth' });
@@ -475,7 +482,7 @@ function clearTimeSlots() {
     if (container) {
         const dict = translations[currentLang];
         container.innerHTML = `
-            <div class="r8-slots-empty">
+            <div class="slots-empty-notice">
                 <i class="fa-solid fa-calendar-day"></i>
                 <span>${dict.timeSlotPlaceholder}</span>
             </div>
@@ -521,7 +528,7 @@ function renderTimeSlots(dateStr, dayOfWeek) {
     slots.forEach(time => {
         const btn = document.createElement('button');
         btn.type = 'button';
-        btn.className = 'r8-slot-btn';
+        btn.className = 'slot-pill-btn';
 
         const [slotH, slotM] = time.split(':').map(Number);
         let isPast = false;
@@ -544,7 +551,7 @@ function renderTimeSlots(dateStr, dayOfWeek) {
         } else {
             btn.innerHTML = `<span>${time}</span><small>${currentLang === 'tr' ? 'M\u00fcsait' : 'Frei'}</small>`;
             btn.addEventListener('click', () => {
-                document.querySelectorAll('.r8-slot-btn').forEach(b => b.classList.remove('selected'));
+                document.querySelectorAll('.slot-pill-btn').forEach(b => b.classList.remove('selected'));
                 btn.classList.add('selected');
                 hiddenInput.value = time;
             });
