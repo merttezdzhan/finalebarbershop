@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Stylesheet with Cache Buster -->
-    <link rel="stylesheet" href="style.css?v=3.5">
+    <link rel="stylesheet" href="style.css?v=4.0">
 </head>
 <body>
 
@@ -310,10 +310,10 @@
             </div>
         </section>
 
-        <!-- BOOKING SECTION (CLEAN & SEPARATE CALENDAR PER BARBER) -->
+        <!-- BOOKING SECTION (EXACT R8 ATELIER WIZARD ARCHITECTURE) -->
         <section id="booking" class="booking-section">
             <div class="container">
-                <div class="booking-clean-card glass-panel">
+                <div class="booking-atelier-frame">
                     <div class="booking-header text-center">
                         <div class="section-tag" data-i18n="bookingTag">ONLINE RESERVIERUNG</div>
                         <h2 class="section-title" data-i18n="bookingTitle">Wunschtermin Vereinbaren</h2>
@@ -329,84 +329,98 @@
                         </div>
                     </div>
 
-                    <form id="booking-form" class="booking-clean-form">
+                    <form id="booking-form" class="atelier-booking-wizard">
                         
-                        <!-- 1. BARBER SELECTION (SEPARATE CALENDAR) -->
-                        <div class="clean-form-block">
-                            <label class="block-label">
-                                <i class="fa-solid fa-user-check"></i> <span data-i18n="lblBarber">W&auml;hlen Sie Ihren Barber</span>
-                            </label>
-                            
-                            <div class="barber-pills-row">
+                        <!-- STEP 1: Staff / Barber Selection (R8 Cards Grid) -->
+                        <div class="wizard-step-box">
+                            <div class="step-badge-title">
+                                <span class="step-num">01</span>
+                                <h3 data-i18n="lblBarber">Friseur / Barber W&auml;hlen</h3>
+                            </div>
+
+                            <div class="barbers-selection-grid">
                                 <!-- Barber 1: Bahattin -->
-                                <div class="barber-pill selected" id="barberBahattin" onclick="selectBarber('Bahattin')">
-                                    <div class="pill-check-icon"><i class="fa-solid fa-circle-check"></i></div>
-                                    <div class="pill-avatar"><i class="fa-solid fa-scissors"></i></div>
-                                    <div class="pill-text">
-                                        <h4 class="pill-name">Bahattin</h4>
-                                        <span class="pill-sub" data-i18n="barber1Role">Usta Berber / Master</span>
+                                <div class="barber-card selected" id="barberBahattin" onclick="selectBarber('Bahattin')">
+                                    <div class="barber-select-check"><i class="fa-solid fa-check"></i></div>
+                                    <div class="barber-avatar-box">
+                                        <div class="barber-avatar-inner">
+                                            <i class="fa-solid fa-user-tie"></i>
+                                        </div>
                                     </div>
+                                    <h4 class="barber-name">Bahattin</h4>
+                                    <p class="barber-role" data-i18n="barber1Role">Usta Berber / Master Stylist</p>
+                                    <span class="barber-status-badge"><i class="fa-solid fa-circle"></i> Verf&uuml;gbar</span>
                                 </div>
 
                                 <!-- Barber 2: Finale Barber Team -->
-                                <div class="barber-pill" id="barberTeam" onclick="selectBarber('Finale Barber Team')">
-                                    <div class="pill-check-icon"><i class="fa-solid fa-circle-check"></i></div>
-                                    <div class="pill-avatar"><i class="fa-solid fa-users"></i></div>
-                                    <div class="pill-text">
-                                        <h4 class="pill-name">Finale Ekibi</h4>
-                                        <span class="pill-sub" data-i18n="barber2Role">N&auml;chster freier Barber</span>
+                                <div class="barber-card" id="barberTeam" onclick="selectBarber('Finale Barber Team')">
+                                    <div class="barber-select-check"><i class="fa-solid fa-check"></i></div>
+                                    <div class="barber-avatar-box">
+                                        <div class="barber-avatar-inner">
+                                            <i class="fa-solid fa-users"></i>
+                                        </div>
                                     </div>
+                                    <h4 class="barber-name">Finale Ekibi</h4>
+                                    <p class="barber-role" data-i18n="barber2Role">N&auml;chster freier Barber</p>
+                                    <span class="barber-status-badge"><i class="fa-solid fa-circle"></i> Verf&uuml;gbar</span>
                                 </div>
                             </div>
                             <input type="hidden" id="selectedBarber" value="Bahattin" required>
                         </div>
 
-                        <!-- 2. SERVICE SELECTION -->
-                        <div class="clean-form-block">
-                            <label class="block-label" for="serviceSelect">
-                                <i class="fa-solid fa-scissors"></i> <span data-i18n="lblService">Gew&uuml;nschte Leistung</span>
-                            </label>
-                            <select id="serviceSelect" class="form-control-luxury" required>
-                                <option value="" disabled selected data-i18n="phSelectService">Bitte Leistung w&auml;hlen...</option>
-                                <optgroup label="Spezial-Pakete">
-                                    <option value="Paket 1: Waschen, Schneiden, Rasieren, F&ouml;hnen &amp; Stylen (33&euro;)">Paket 1 - Waschen, Schneiden, Rasieren, F&ouml;hnen &amp; Stylen (33&euro;)</option>
-                                    <option value="Paket 2: Waschen, Schneiden, Rasieren, F&ouml;hnen, Stylen &amp; Augenbrauen (38&euro;)">Paket 2 - Waschen, Schneiden, Rasieren, F&ouml;hnen, Stylen &amp; Augenbrauen (38&euro;)</option>
-                                    <option value="Paket 3: Waschen, Schneiden, Rasieren, F&ouml;hnen, Stylen, Augenbrauen, F&auml;rben (60&euro;)">Paket 3 - Komplett + F&auml;rben (Bart/Haare) (60&euro;)</option>
-                                </optgroup>
-                                <optgroup label="Einzelne Leistungen">
-                                    <option value="Trocken Haarschnitt (18&euro;)">Trocken Haarschnitt (18&euro;)</option>
-                                    <option value="Waschen, Schneiden, F&ouml;hnen (21&euro;)">Waschen, Schneiden, F&ouml;hnen (21&euro;)</option>
-                                    <option value="Bartrasur (12&euro;)">Bartrasur (12&euro;)</option>
-                                    <option value="Augenbrauen zupfen (7&euro;)">Augenbrauen zupfen (7&euro;)</option>
-                                    <option value="Kinder Haarschnitt bis 10 Jahre (15&euro;)">Kinder Haarschnitt bis 10 Jahre (15&euro;)</option>
-                                    <option value="Waschen, F&ouml;hnen, Stylen (7&euro;)">Waschen, F&ouml;hnen, Stylen (7&euro;)</option>
-                                    <option value="Bart / Haare F&auml;rben (20&euro;)">Bart / Haare F&auml;rben (20&euro;)</option>
-                                </optgroup>
-                            </select>
+                        <!-- STEP 2: Service Selection (R8 Dropdown / Tiles) -->
+                        <div class="wizard-step-box">
+                            <div class="step-badge-title">
+                                <span class="step-num">02</span>
+                                <h3 data-i18n="lblService">Gew&uuml;nschte Leistung</h3>
+                            </div>
+
+                            <div style="width: 100%;">
+                                <select id="serviceSelect" class="form-control" required style="width: 100%; font-size: 16px; padding: 0.9rem 1.2rem;">
+                                    <option value="" disabled selected data-i18n="phSelectService">Bitte Leistung w&auml;hlen...</option>
+                                    <optgroup label="Spezial-Pakete">
+                                        <option value="Paket 1: Waschen, Schneiden, Rasieren, F&ouml;hnen &amp; Stylen (33&euro;)">Paket 1 - Waschen, Schneiden, Rasieren, F&ouml;hnen &amp; Stylen (33&euro;)</option>
+                                        <option value="Paket 2: Waschen, Schneiden, Rasieren, F&ouml;hnen, Stylen &amp; Augenbrauen (38&euro;)">Paket 2 - Waschen, Schneiden, Rasieren, F&ouml;hnen, Stylen &amp; Augenbrauen (38&euro;)</option>
+                                        <option value="Paket 3: Waschen, Schneiden, Rasieren, F&ouml;hnen, Stylen, Augenbrauen, F&auml;rben (60&euro;)">Paket 3 - Komplett + F&auml;rben (Bart/Haare) (60&euro;)</option>
+                                    </optgroup>
+                                    <optgroup label="Einzelne Leistungen">
+                                        <option value="Trocken Haarschnitt (18&euro;)">Trocken Haarschnitt (18&euro;)</option>
+                                        <option value="Waschen, Schneiden, F&ouml;hnen (21&euro;)">Waschen, Schneiden, F&ouml;hnen (21&euro;)</option>
+                                        <option value="Bartrasur (12&euro;)">Bartrasur (12&euro;)</option>
+                                        <option value="Augenbrauen zupfen (7&euro;)">Augenbrauen zupfen (7&euro;)</option>
+                                        <option value="Kinder Haarschnitt bis 10 Jahre (15&euro;)">Kinder Haarschnitt bis 10 Jahre (15&euro;)</option>
+                                        <option value="Waschen, F&ouml;hnen, Stylen (7&euro;)">Waschen, F&ouml;hnen, Stylen (7&euro;)</option>
+                                        <option value="Bart / Haare F&auml;rben (20&euro;)">Bart / Haare F&auml;rben (20&euro;)</option>
+                                    </optgroup>
+                                </select>
+                            </div>
                         </div>
 
-                        <!-- 3. DATE & TIME SELECTION -->
-                        <div class="clean-form-block">
-                            <div class="form-row-2">
-                                <div class="form-field-unit">
-                                    <label class="block-label" for="bookingDate">
+                        <!-- STEP 3: Date & Time Matrix Split (R8 Split Layout) -->
+                        <div class="wizard-step-box">
+                            <div class="step-badge-title">
+                                <span class="step-num">03</span>
+                                <h3>Datum &amp; Uhrzeit W&auml;hlen</h3>
+                            </div>
+
+                            <div class="date-time-matrix-grid">
+                                <div class="date-picker-column">
+                                    <label for="bookingDate" class="matrix-label">
                                         <i class="fa-regular fa-calendar-days"></i> <span data-i18n="lblDate">Datum W&auml;hlen</span>
                                     </label>
-                                    <input type="date" id="bookingDate" class="form-control-luxury" required>
-                                    <small class="form-help-text" data-i18n="dateHelp">Sonntags ist der Salon geschlossen.</small>
+                                    <input type="date" id="bookingDate" class="form-control matrix-date-input" required>
+                                    <small class="form-help-text" data-i18n="dateHelp" style="display:block; margin-top:0.4rem;">Sonntags ist der Salon geschlossen.</small>
                                 </div>
 
-                                <div class="form-field-unit">
-                                    <label class="block-label">
+                                <div class="time-matrix-column">
+                                    <label class="matrix-label">
                                         <i class="fa-regular fa-clock"></i> <span data-i18n="lblTime">Freie Uhrzeit Ausw&auml;hlen</span>
+                                        <span id="calendarIndicatorTag" style="font-size:0.75rem; color:var(--primary-gold); margin-left:auto; text-transform:none;">(<strong id="barberNameBadge">Bahattin</strong>)</span>
                                     </label>
-                                    <div id="barberCalendarIndicator" class="barber-calendar-indicator">
-                                        <span><i class="fa-solid fa-calendar-check"></i> <strong id="calendarBarberName">Bahattin</strong> i&ccedil;in saatler:</span>
-                                    </div>
-                                    <div id="timeSlotsContainer" class="time-slots-clean-grid">
+                                    <div id="timeSlotsContainer" class="time-slots-grid">
                                         <div class="slots-placeholder">
                                             <i class="fa-solid fa-calendar-day"></i>
-                                            <p data-i18n="timeSlotPlaceholder">Bitte w&auml;hlen Sie zuerst oben ein Datum aus, um die verf&uuml;gbaren Zeiten zu sehen.</p>
+                                            <p data-i18n="timeSlotPlaceholder">Bitte w&auml;hlen Sie zuerst links ein Datum aus, um die verf&uuml;gbaren Zeiten zu sehen.</p>
                                         </div>
                                     </div>
                                     <input type="hidden" id="selectedTimeSlot" required>
@@ -414,38 +428,40 @@
                             </div>
                         </div>
 
-                        <!-- 4. CUSTOMER CONTACT DETAILS -->
-                        <div class="clean-form-block">
-                            <label class="block-label">
-                                <i class="fa-regular fa-id-card"></i> <span>Ihre Kontaktdaten</span>
-                            </label>
+                        <!-- STEP 4: Customer Information Ribbon (R8 Ribbon Style) -->
+                        <div class="wizard-step-box">
+                            <div class="step-badge-title">
+                                <span class="step-num">04</span>
+                                <h3>Ihre Kontaktdaten</h3>
+                            </div>
                             
-                            <div class="form-row-2">
-                                <div class="form-field-unit">
-                                    <input type="text" id="customerName" class="form-control-luxury" placeholder="Ihr Vor- &amp; Nachname" data-ph-i18n="phName" required>
+                            <div class="customer-fields-ribbon">
+                                <div class="ribbon-input-group">
+                                    <i class="fa-regular fa-user input-icon"></i>
+                                    <input type="text" id="customerName" class="form-control ribbon-control" placeholder="Ihr Vor- &amp; Nachname" data-ph-i18n="phName" required>
                                 </div>
-
-                                <div class="form-field-unit">
-                                    <input type="tel" id="customerPhone" class="form-control-luxury" placeholder="Telefonnummer" data-ph-i18n="phPhone" required>
+                                <div class="ribbon-input-group">
+                                    <i class="fa-solid fa-phone input-icon"></i>
+                                    <input type="tel" id="customerPhone" class="form-control ribbon-control" placeholder="Telefonnummer" data-ph-i18n="phPhone" required>
                                 </div>
-                            </div>
-
-                            <div style="margin-top: 0.8rem;">
-                                <input type="email" id="customerEmail" class="form-control-luxury" placeholder="E-Mail Adresse (F&uuml;r Best&auml;tigungscode)" data-ph-i18n="phEmail" required>
-                                <small class="form-help-text" data-i18n="emailHelp" style="display:block; margin-top: 0.3rem;">Terminbest&auml;tigung und Ihr 6-stelliger Code werden an diese E-Mail gesendet.</small>
-                            </div>
-
-                            <div style="margin-top: 0.8rem;">
-                                <input type="text" id="customerNotes" class="form-control-luxury" placeholder="Anmerkungen / W&uuml;nsche (Optional)" data-ph-i18n="phNotes">
+                                <div class="ribbon-input-group full-ribbon">
+                                    <i class="fa-regular fa-envelope input-icon"></i>
+                                    <input type="email" id="customerEmail" class="form-control ribbon-control" placeholder="E-Mail Adresse (F&uuml;r Best&auml;tigungscode)" data-ph-i18n="phEmail" required>
+                                </div>
+                                <div class="ribbon-input-group full-ribbon">
+                                    <i class="fa-regular fa-note-sticky input-icon"></i>
+                                    <input type="text" id="customerNotes" class="form-control ribbon-control" placeholder="Anmerkungen (Optional)" data-ph-i18n="phNotes">
+                                </div>
                             </div>
                         </div>
 
-                        <!-- 5. SUBMIT BUTTON -->
-                        <div class="form-actions-clean">
-                            <button type="submit" class="btn btn-primary btn-xl pulse-glow" id="submitBookingBtn" style="width:100%;">
+                        <!-- Final Action Bar -->
+                        <div class="wizard-action-bar">
+                            <button type="submit" class="btn btn-primary btn-lg atelier-submit-btn pulse-glow" id="submitBookingBtn">
                                 <i class="fa-solid fa-check-circle"></i> <span data-i18n="btnConfirmBooking">Termin Jetzt Verbindlich Buchen</span>
                             </button>
                         </div>
+
                     </form>
                 </div>
             </div>
@@ -538,7 +554,7 @@
                     <!-- Interactive Google Map Frame -->
                     <div class="contact-map-wrapper glass-frame">
                         <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2564.123456789!2d8.56789!3d49.98765!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bd9a0000000000%3A0x0!2sWestendstra%C3%9Fe%203%2C%2064546%20M%C3%B6rfelden-Walldorf!5e0!3m2!1sde!2sde!4v1700000000000!5m2!1sde!2sde!4v1700000000000" 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2564.123456789!2d8.56789!3d49.98765!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bd9a0000000000%3A0x0!2sWestendstra%C3%9Fe%203%2C%2064546%20M%C3%B6rfelden-Walldorf!5e0!3m2!1sde!2sde!4v1700000000000!5m2!1sde!2sde" 
                             width="100%" 
                             height="100%" 
                             style="border:0; filter: invert(90%) hue-rotate(180deg) contrast(120%);" 
@@ -603,6 +619,6 @@
     </div>
 
     <!-- JavaScript File with Cache Buster -->
-    <script src="script.js?v=3.5"></script>
+    <script src="script.js?v=4.0"></script>
 </body>
 </html>

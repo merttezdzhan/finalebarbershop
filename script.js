@@ -82,15 +82,15 @@ const translations = {
         bookingTag: "ONLINE RESERVIERUNG",
         bookingTitle: "Wunschtermin Vereinbaren",
         bookingSub: "W\u00e4hlen Sie Ihren Barber, Datum und Uhrzeit aus. Sie erhalten sofort einen Sicherheitscode.",
-        lblBarber: "W\u00e4hlen Sie Ihren Barber",
-        barber1Role: "Usta Berber / Master",
+        lblBarber: "Friseur / Barber W\u00e4hlen",
+        barber1Role: "Usta Berber / Master Stylist",
         barber2Role: "N\u00e4chster freier Barber",
         lblService: "Gew\u00fcnschte Leistung",
         phSelectService: "Bitte Leistung w\u00e4hlen...",
         lblDate: "Datum W\u00e4hlen",
         dateHelp: "Sonntags ist der Salon geschlossen.",
         lblTime: "Freie Uhrzeit Ausw\u00e4hlen",
-        timeSlotPlaceholder: "Bitte w\u00e4hlen Sie zuerst oben ein Datum aus, um die verf\u00fcgbaren Zeiten zu sehen.",
+        timeSlotPlaceholder: "Bitte w\u00e4hlen Sie zuerst links ein Datum aus, um die verf\u00fcgbaren Zeiten zu sehen.",
         lblName: "Ihr Vor- & Nachname",
         phName: "z.B. Max Mustermann",
         lblPhone: "Telefonnummer",
@@ -187,15 +187,15 @@ const translations = {
         bookingTag: "ONL\u0130NE RANDEVU",
         bookingTitle: "Hemen Randevunuzu Olu\u015fturun",
         bookingSub: "Berberinizi, tarihi ve saati se\u00e7in. Randevu olu\u015fturuldu\u011funda g\u00fcvenlik kodunuzu an\u0131nda alacaks\u0131n\u0131z.",
-        lblBarber: "Berberinizi Se\u00e7in",
-        barber1Role: "Usta Berber / Master",
+        lblBarber: "Friseur / Barber W\u00e4hlen",
+        barber1Role: "Usta Berber / Master Stylist",
         barber2Role: "\u0130lk M\u00fcsait Usta / Ekip",
         lblService: "Almak \u0130stedi\u011finiz Hizmet",
         phSelectService: "L\u00fctfen bir hizmet se\u00e7iniz...",
         lblDate: "Tarih Se\u00e7iniz",
         dateHelp: "Pazar g\u00fcnleri salonumuz kapal\u0131d\u0131r.",
         lblTime: "M\u00fcsait Saat Se\u00e7iniz",
-        timeSlotPlaceholder: "M\u00fcsait saatleri g\u00f6rmek i\u00e7in l\u00fctfen \u00f6nce yukar\u0131dan bir tarih se\u00e7iniz.",
+        timeSlotPlaceholder: "M\u00fcsait saatleri g\u00f6rmek i\u00e7in l\u00fctfen \u00f6nce soldan bir tarih se\u00e7iniz.",
         lblName: "Ad\u0131n\u0131z & Soyad\u0131n\u0131z",
         phName: "\u00d6rn: Ahmet Y\u0131lmaz",
         lblPhone: "Telefon Numaran\u0131z",
@@ -300,7 +300,7 @@ const translations = {
         lblDate: "Select Date",
         dateHelp: "The salon is closed on Sundays.",
         lblTime: "Choose Available Time",
-        timeSlotPlaceholder: "Please choose a date above to see available time slots.",
+        timeSlotPlaceholder: "Please choose a date to see available time slots.",
         lblName: "Your Full Name",
         phName: "e.g. John Doe",
         lblPhone: "Phone Number",
@@ -394,26 +394,26 @@ function initMobileNav() {
     }
 }
 
-// --- Barber Selection (Separate Calendar Handler) ---
+// --- Barber Selection (Per-Barber Separate Calendar) ---
 function selectBarber(barberName) {
     const barberInput = document.getElementById('selectedBarber');
     if (barberInput) barberInput.value = barberName;
 
     const bBahattin = document.getElementById('barberBahattin');
     const bTeam = document.getElementById('barberTeam');
-    const indicatorName = document.getElementById('calendarBarberName');
+    const badge = document.getElementById('barberNameBadge');
 
     if (barberName.includes('Bahattin')) {
         if (bBahattin) bBahattin.classList.add('selected');
         if (bTeam) bTeam.classList.remove('selected');
-        if (indicatorName) indicatorName.textContent = 'Bahattin';
+        if (badge) badge.textContent = 'Bahattin';
     } else {
         if (bBahattin) bBahattin.classList.remove('selected');
         if (bTeam) bTeam.classList.add('selected');
-        if (indicatorName) indicatorName.textContent = (currentLang === 'tr' ? 'Finale Ekibi' : 'Finale Team');
+        if (badge) badge.textContent = (currentLang === 'tr' ? 'Finale Ekibi' : 'Finale Team');
     }
 
-    // Immediately re-render time slots for the selected date and new barber!
+    // Re-render time slots for currently selected date
     const dateInput = document.getElementById('bookingDate');
     if (dateInput && dateInput.value) {
         const selectedDate = new Date(dateInput.value + 'T00:00:00');
