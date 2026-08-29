@@ -1,5 +1,5 @@
 ﻿/* ==========================================================================
-   DER FINALE BARBERSHOP - LUXURY MODERN STYLESHEET (100% PURE VERTICAL MOBILE)
+   DER FINALE BARBERSHOP - LUXURY MODERN STYLESHEET (MOBILE FIRST CLEAN)
    ========================================================================== */
 
 :root {
@@ -18,7 +18,7 @@
     --status-closed: #ef4444;
     --font-heading: 'Outfit', sans-serif;
     --font-body: 'Plus Jakarta Sans', sans-serif;
-    --radius-sm: 4px;
+    --radius-sm: 6px;
     --radius-md: 10px;
     --radius-lg: 16px;
     --radius-full: 9999px;
@@ -27,7 +27,7 @@
     --shadow-gold: 0 0 25px rgba(212, 175, 55, 0.25);
 }
 
-/* Reset & Global Zero-Overflow Guarantee */
+/* Global Reset & Strict Zero-Overflow */
 *, *::before, *::after {
     margin: 0;
     padding: 0;
@@ -86,13 +86,13 @@ button, input, select, textarea {
     padding: 0 1.2rem;
 }
 
-/* Glassmorphism Classes */
+/* Glassmorphism */
 .glass-panel {
     background: var(--bg-card);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--border-light);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     box-shadow: var(--shadow-card);
 }
 
@@ -100,7 +100,7 @@ button, input, select, textarea {
     background: rgba(18, 20, 26, 0.5);
     backdrop-filter: blur(12px);
     border: 1px solid var(--border-gold);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     overflow: hidden;
 }
 
@@ -785,393 +785,339 @@ button, input, select, textarea {
 }
 
 /* ==========================================================================
-   R8 ATELIER BOOKING WIZARD (DESKTOP & 100% PURE VERTICAL MOBILE)
+   MOBILE-FIRST CLEAN BOOKING BOX (ZERO CRAMP - 100% FIT)
    ========================================================================== */
 .booking-section {
-    padding: 5rem 0;
+    padding: 4rem 0;
     width: 100%;
 }
 
-.booking-atelier-frame {
-    background: #06070a;
+.m-booking-box {
+    background: #090a0e;
     border: 1px solid var(--border-gold);
-    border-radius: var(--radius-sm);
-    padding: 3.5rem 2.8rem;
-    box-shadow: var(--shadow-card), 0 0 50px rgba(212, 175, 55, 0.12);
-    width: 100%;
-    max-width: 900px;
+    border-radius: var(--radius-md);
+    padding: 2.2rem 1.8rem;
+    max-width: 620px;
     margin: 0 auto;
-}
-
-.atelier-booking-wizard {
-    display: flex;
-    flex-direction: column;
-    gap: 2.2rem;
-    margin-top: 2rem;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.8), 0 0 30px rgba(212, 175, 55, 0.12);
     width: 100%;
 }
 
-.wizard-step-box {
-    background: rgba(12, 13, 16, 0.9);
-    border: 1px solid var(--border-light);
-    border-radius: var(--radius-sm);
-    padding: 2rem;
-    width: 100%;
-}
-
-.step-badge-title {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.6rem;
-    border-bottom: 1px solid var(--border-light);
-    padding-bottom: 0.9rem;
-}
-
-.step-num {
-    font-family: var(--font-heading);
-    font-size: 1.15rem;
-    font-weight: 900;
-    background: #ffffff;
-    color: #000000;
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 2px;
-    flex-shrink: 0;
-}
-
-.step-badge-title h3 {
-    font-size: 1.15rem;
-    font-weight: 800;
-    color: #ffffff;
-    letter-spacing: 1px;
-    margin: 0;
-}
-
-/* Staff / Barber Selection Grid */
-.barbers-selection-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-    max-width: 680px;
-    margin: 0 auto;
-    width: 100%;
-}
-
-.barber-card {
-    background: rgba(12, 13, 16, 0.95);
-    border: 1px solid var(--border-light);
-    border-radius: var(--radius-sm);
-    padding: 1.8rem 1.4rem;
-    cursor: pointer;
-    touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent;
-    transition: var(--transition);
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.m-booking-header {
     text-align: center;
-    user-select: none;
-    box-shadow: var(--shadow-card);
-    min-height: 230px;
-    justify-content: space-between;
+    margin-bottom: 1.8rem;
 }
 
-.barber-card:hover {
-    background: var(--bg-card-hover);
-    border-color: var(--primary-gold);
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-gold);
-}
-
-.barber-card.selected {
-    background: rgba(212, 175, 55, 0.1);
-    border: 2px solid var(--primary-gold);
-    box-shadow: 0 0 25px rgba(212, 175, 55, 0.35);
-}
-
-.barber-select-check {
-    position: absolute;
-    top: 0.8rem;
-    right: 0.8rem;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: var(--primary-gold);
-    color: #000000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.8rem;
-    opacity: 0;
-    transform: scale(0.5);
-    transition: var(--transition);
-}
-
-.barber-card.selected .barber-select-check {
-    opacity: 1;
-    transform: scale(1);
-}
-
-.barber-avatar-box {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    margin-bottom: 0.8rem;
-    position: relative;
-    padding: 3px;
-    background: linear-gradient(135deg, var(--primary-gold), rgba(255, 255, 255, 0.15));
-    flex-shrink: 0;
-}
-
-.barber-avatar-inner {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: #14161c;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--primary-gold);
-    font-size: 1.8rem;
-}
-
-.barber-name {
+.m-booking-tag {
     font-family: var(--font-heading);
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: #ffffff;
-    margin-bottom: 0.2rem;
-}
-
-.barber-role {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    margin-bottom: 0.6rem;
-}
-
-.barber-status-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
     font-size: 0.75rem;
-    font-weight: 700;
-    color: var(--status-open);
-}
-
-.barber-status-badge i {
-    font-size: 0.5rem;
-}
-
-/* STEP 3: Date & Time Matrix Split */
-.date-time-matrix-grid {
-    display: grid;
-    grid-template-columns: 280px 1fr;
-    gap: 2rem;
-    width: 100%;
-}
-
-.matrix-label {
-    font-size: 0.85rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--text-secondary);
-    margin-bottom: 0.8rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.matrix-date-input {
-    font-size: 1rem;
-    padding: 0.9rem;
-    width: 100%;
-    background: rgba(10, 11, 15, 0.9);
-    border: 1px solid var(--border-light);
-    color: #fff;
-    border-radius: var(--radius-sm);
-    outline: none;
-}
-
-.matrix-date-input:focus {
-    border-color: var(--primary-gold);
-}
-
-/* Time Slots Grid */
-.time-slots-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-    gap: 0.6rem;
-    max-height: 220px;
-    overflow-y: auto;
-    padding-right: 0.2rem;
-    width: 100%;
-}
-
-.slots-placeholder {
-    grid-column: 1 / -1;
-    padding: 2rem 1rem;
-    text-align: center;
-    background: rgba(0, 0, 0, 0.4);
-    border: 1px dashed var(--border-light);
-    border-radius: var(--radius-sm);
-    color: var(--text-muted);
-}
-
-.slots-placeholder i {
-    font-size: 2rem;
+    font-weight: 800;
     color: var(--primary-gold);
-    margin-bottom: 0.5rem;
+    letter-spacing: 1.5px;
     display: block;
+    margin-bottom: 0.3rem;
 }
 
-.time-slot-btn {
-    background: rgba(0, 0, 0, 0.8);
-    border: 1px solid var(--border-light);
-    padding: 0.65rem 0.4rem;
-    border-radius: var(--radius-sm);
-    color: var(--text-primary);
-    cursor: pointer;
-    transition: var(--transition);
+.m-booking-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 0.4rem;
+}
+
+.m-booking-sub {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+}
+
+.m-booking-form {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    touch-action: manipulation;
+    gap: 1.4rem;
+    width: 100%;
 }
 
-.time-slot-btn span {
+.m-step {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    width: 100%;
+}
+
+.m-step-title {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
     font-family: var(--font-heading);
     font-size: 0.95rem;
     font-weight: 700;
+    color: #fff;
 }
 
-.time-slot-btn small {
-    font-size: 0.68rem;
-    color: var(--status-open);
+.m-step-badge {
+    background: var(--primary-gold);
+    color: #000;
+    font-size: 0.8rem;
+    font-weight: 900;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
 }
 
-.time-slot-btn:hover:not(:disabled) {
-    background: rgba(212, 175, 55, 0.15);
+/* Barber List */
+.m-barbers-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    width: 100%;
+}
+
+.m-barber-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm);
+    padding: 0.85rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    cursor: pointer;
+    transition: var(--transition);
+    user-select: none;
+    width: 100%;
+}
+
+.m-barber-item:hover {
+    background: rgba(212, 175, 55, 0.06);
     border-color: var(--primary-gold);
 }
 
-.time-slot-btn.selected {
-    background: var(--primary-gold) !important;
-    color: #000000 !important;
-    border-color: var(--primary-gold) !important;
-    box-shadow: var(--shadow-gold);
+.m-barber-item.selected {
+    background: rgba(212, 175, 55, 0.12);
+    border: 1.5px solid var(--primary-gold);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
 }
 
-.time-slot-btn.selected small {
-    color: #000000 !important;
-    font-weight: 700;
-}
-
-.time-slot-btn.booked, .time-slot-btn.past, .time-slot-btn:disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
-    border-color: transparent;
-    background: rgba(255, 255, 255, 0.02);
-}
-
-.time-slot-btn.booked small, .time-slot-btn.past small {
-    color: var(--status-closed);
-}
-
-/* Customer Fields Ribbon */
-.customer-fields-ribbon {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.2rem;
-    width: 100%;
-}
-
-.ribbon-input-group {
-    position: relative;
+.m-barber-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(212, 175, 55, 0.15);
+    border: 1px solid var(--primary-gold);
     display: flex;
     align-items: center;
-    width: 100%;
-}
-
-.ribbon-input-group.full-ribbon {
-    grid-column: 1 / -1;
-}
-
-.input-icon {
-    position: absolute;
-    left: 1.1rem;
+    justify-content: center;
+    font-size: 1.1rem;
     color: var(--primary-gold);
-    font-size: 0.95rem;
-    pointer-events: none;
+    flex-shrink: 0;
 }
 
-.ribbon-control {
+.m-barber-info {
+    flex-grow: 1;
+    min-width: 0;
+}
+
+.m-barber-name {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.m-barber-desc {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.m-barber-radio {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1.5px solid var(--border-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    color: transparent;
+    transition: var(--transition);
+    flex-shrink: 0;
+}
+
+.m-barber-item.selected .m-barber-radio {
+    background: var(--primary-gold);
+    border-color: var(--primary-gold);
+    color: #000;
+}
+
+/* Inputs */
+.m-input {
     width: 100% !important;
-    padding-left: 2.8rem !important;
-    background: rgba(10, 11, 15, 0.85);
+    background: rgba(14, 16, 22, 0.95);
     border: 1px solid var(--border-light);
-    padding-top: 0.85rem;
-    padding-bottom: 0.85rem;
-    padding-right: 1rem;
     border-radius: var(--radius-sm);
+    padding: 0.85rem 1rem;
     color: #fff;
     font-size: 16px;
     outline: none;
     transition: var(--transition);
 }
 
-.ribbon-control:focus {
+.m-input:focus {
     border-color: var(--primary-gold);
-    box-shadow: 0 0 15px rgba(212, 175, 55, 0.25);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
 }
 
-.wizard-action-bar {
+.m-input option {
+    background: #12141c;
+    color: #fff;
+}
+
+.m-help {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+/* Time Slots Grid */
+.m-slots-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.45rem;
+    max-height: 180px;
+    overflow-y: auto;
+    padding-right: 0.2rem;
+    width: 100%;
+}
+
+.m-slot-btn {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm);
+    padding: 0.5rem 0.2rem;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: var(--transition);
+    touch-action: manipulation;
+}
+
+.m-slot-btn span {
+    font-family: var(--font-heading);
+    font-size: 0.88rem;
+    font-weight: 700;
+}
+
+.m-slot-btn small {
+    font-size: 0.62rem;
+    color: var(--status-open);
+}
+
+.m-slot-btn:hover:not(:disabled) {
+    border-color: var(--primary-gold);
+    background: rgba(212, 175, 55, 0.12);
+}
+
+.m-slot-btn.selected {
+    background: var(--primary-gold) !important;
+    color: #000 !important;
+    border-color: var(--primary-gold) !important;
+    box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
+}
+
+.m-slot-btn.selected small {
+    color: #000 !important;
+    font-weight: 700;
+}
+
+.m-slot-btn:disabled, .m-slot-btn.booked, .m-slot-btn.past {
+    opacity: 0.3;
+    cursor: not-allowed;
+    border-color: transparent;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.m-slot-btn.booked small, .m-slot-btn.past small {
+    color: var(--status-closed);
+}
+
+.m-slots-empty {
+    grid-column: 1 / -1;
     text-align: center;
-    margin-top: 0.5rem;
+    padding: 1.5rem 1rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+.m-slots-empty i {
+    font-size: 1.8rem;
+    color: var(--primary-gold);
+    margin-bottom: 0.4rem;
+    display: block;
+}
+
+/* Contact Inputs List */
+.m-inputs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
     width: 100%;
 }
 
-.atelier-submit-btn {
+/* Submit Button */
+.m-submit-btn {
     width: 100%;
-    max-width: 550px;
-    padding: 1.1rem 2rem;
+    background: linear-gradient(135deg, #d4af37 0%, #b89628 100%);
+    color: #000;
+    font-family: var(--font-heading);
+    font-weight: 800;
     font-size: 1.05rem;
+    padding: 1rem 1.5rem;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-top: 0.5rem;
+    transition: var(--transition);
 }
 
-/* Salon Closed Banner */
-.salon-closed-banner {
+.m-submit-btn:hover {
+    background: linear-gradient(135deg, #e5c14e 0%, #c9a334 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.5);
+}
+
+.m-closed-alert {
     background: rgba(239, 68, 68, 0.15);
     border: 1px solid rgba(239, 68, 68, 0.4);
     color: #fca5a5;
-    padding: 1rem 1.4rem;
+    padding: 0.85rem 1rem;
     border-radius: var(--radius-sm);
     display: flex;
     align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-    width: 100%;
+    gap: 0.8rem;
+    margin-bottom: 1.2rem;
 }
 
-.salon-closed-banner i {
-    font-size: 1.8rem;
+.m-closed-alert i {
+    font-size: 1.5rem;
     color: #ef4444;
-    flex-shrink: 0;
 }
 
-.salon-closed-banner strong {
-    font-size: 1.05rem;
+.m-closed-alert strong {
+    font-size: 0.95rem;
     color: #fff;
     display: block;
-    margin-bottom: 0.15rem;
 }
 
-.salon-closed-banner p {
-    font-size: 0.85rem;
+.m-closed-alert p {
+    font-size: 0.8rem;
     margin: 0;
 }
 
@@ -1444,7 +1390,7 @@ button, input, select, textarea {
 }
 
 /* ==========================================================================
-   100% PURE VERTICAL MOBILE MEDIA QUERIES (NO SIDE-BY-SIDE ON PHONE)
+   RESPONSIVE MEDIA QUERIES (MOBILE PHONE OPTIMIZATIONS)
    ========================================================================== */
 @media (max-width: 992px) {
     .nav-menu {
@@ -1487,10 +1433,10 @@ button, input, select, textarea {
     }
 }
 
-/* 100% VERTICAL SMARTPHONE RULES (<= 768px) */
+/* MOBILE PHONES <= 768px */
 @media (max-width: 768px) {
     .container {
-        padding: 0 0.8rem !important;
+        padding: 0 0.75rem !important;
         width: 100% !important;
     }
 
@@ -1500,12 +1446,12 @@ button, input, select, textarea {
     }
 
     .hero-logo-img {
-        width: 110px;
-        height: 110px;
+        width: 105px;
+        height: 105px;
     }
 
     .hero-title {
-        font-size: 1.95rem;
+        font-size: 1.9rem;
     }
 
     .hero-buttons {
@@ -1535,118 +1481,35 @@ button, input, select, textarea {
         font-size: 1.75rem;
     }
 
-    /* 100% VERTICAL BOOKING ATELIER FRAME */
+    /* MOBILE BOOKING BOX */
     .booking-section {
-        padding: 2.5rem 0 !important;
+        padding: 2rem 0 !important;
     }
 
-    .booking-atelier-frame {
-        padding: 1.4rem 0.8rem !important;
+    .m-booking-box {
+        padding: 1.2rem 0.9rem !important;
+        border-radius: var(--radius-sm) !important;
     }
 
-    .wizard-step-box {
-        padding: 1.2rem 0.8rem !important;
+    .m-booking-title {
+        font-size: 1.5rem;
     }
 
-    .step-badge-title {
-        gap: 0.6rem;
-        margin-bottom: 1.1rem;
-        padding-bottom: 0.6rem;
-    }
-
-    .step-num {
-        width: 28px;
-        height: 28px;
-        font-size: 0.95rem;
-    }
-
-    .step-badge-title h3 {
-        font-size: 1rem;
-    }
-
-    /* BERBER KARTLARI MOBILDE %100 DIKEY (ALT ALTA) */
-    .barbers-selection-grid {
-        grid-template-columns: 1fr !important;
-        gap: 0.8rem !important;
-        max-width: 100% !important;
-    }
-
-    .barber-card {
-        flex-direction: row !important;
-        align-items: center !important;
-        text-align: left !important;
-        padding: 0.9rem 1rem !important;
-        min-height: auto !important;
-        gap: 0.9rem !important;
-    }
-
-    .barber-avatar-box {
-        width: 48px !important;
-        height: 48px !important;
-        margin-bottom: 0 !important;
-    }
-
-    .barber-avatar-inner {
-        font-size: 1.2rem !important;
-    }
-
-    .barber-name {
-        font-size: 1.05rem !important;
-        margin-bottom: 0.1rem !important;
-    }
-
-    .barber-role {
-        font-size: 0.72rem !important;
-        margin-bottom: 0 !important;
-        text-align: left !important;
-        justify-content: flex-start !important;
-    }
-
-    .barber-status-badge {
-        display: none !important;
-    }
-
-    .barber-select-check {
-        position: static !important;
-        margin-left: auto !important;
-        transform: scale(1) !important;
-    }
-
-    /* TARIH VE SAAT MOBILDE %100 DIKEY (ALT ALTA) */
-    .date-time-matrix-grid {
-        grid-template-columns: 1fr !important;
-        gap: 1.2rem !important;
-    }
-
-    /* ILETISIM BILGILERI MOBILDE %100 DIKEY (ALT ALTA) */
-    .customer-fields-ribbon {
-        grid-template-columns: 1fr !important;
-        gap: 0.8rem !important;
-    }
-
-    /* SAAT BUTONLARI */
-    .time-slots-grid {
+    .m-slots-grid {
         grid-template-columns: repeat(4, 1fr) !important;
-        gap: 0.4rem !important;
-        max-height: 170px !important;
+        gap: 0.35rem !important;
     }
 
-    .time-slot-btn {
-        padding: 0.45rem 0.15rem !important;
+    .m-slot-btn {
+        padding: 0.45rem 0.1rem !important;
     }
 
-    .time-slot-btn span {
+    .m-slot-btn span {
         font-size: 0.82rem !important;
     }
 
-    .time-slot-btn small {
-        font-size: 0.6rem !important;
-    }
-
-    .atelier-submit-btn {
-        max-width: 100% !important;
-        font-size: 0.95rem !important;
-        padding: 0.95rem 1rem !important;
+    .m-slot-btn small {
+        font-size: 0.58rem !important;
     }
 
     .footer-content {
@@ -1659,9 +1522,9 @@ button, input, select, textarea {
     }
 }
 
-/* SMALL SCREENS <= 380px */
+/* SMALL PHONES <= 380px */
 @media (max-width: 380px) {
-    .time-slots-grid {
+    .m-slots-grid {
         grid-template-columns: repeat(3, 1fr) !important;
     }
 }
