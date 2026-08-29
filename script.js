@@ -1,5 +1,5 @@
 // ==========================================================================
-// FINALE BARBERSHOP - CLIENT JAVASCRIPT (V7 PURE SEPARATE CALENDARS)
+// FINALE BARBERSHOP - CLIENT JAVASCRIPT (V8 DYNAMIC SEPARATE CALENDARS)
 // ==========================================================================
 
 const BARBER_EMAIL = "Habapli7@gmail.com";
@@ -83,7 +83,7 @@ const translations = {
         bookingTitle: "Wunschtermin Vereinbaren",
         bookingSub: "W\u00e4hlen Sie Ihren Barber, Datum und Uhrzeit aus.",
         lblBarber: "Friseur / Barber W\u00e4hlen",
-        barber1Role: "Usta Berber / Master",
+        barber1Role: "Usta Berber / Master Stylist",
         barber2Role: "N\u00e4chster freier Barber",
         lblService: "Gew\u00fcnschte Leistung",
         phSelectService: "Bitte Leistung w\u00e4hlen...",
@@ -187,7 +187,7 @@ const translations = {
         bookingTitle: "Hemen Randevunuzu Olu\u015fturun",
         bookingSub: "Berberinizi, tarihi ve saati se\u00e7in.",
         lblBarber: "Berberinizi Se\u00e7in",
-        barber1Role: "Usta Berber / Master",
+        barber1Role: "Usta Berber / Master Stylist",
         barber2Role: "\u0130lk M\u00fcsait Usta / Ekip",
         lblService: "Almak \u0130stedi\u011finiz Hizmet",
         phSelectService: "L\u00fctfen bir hizmet se\u00e7iniz...",
@@ -391,22 +391,22 @@ function initMobileNav() {
     }
 }
 
-// --- Barber Selection (V7 Per-Barber Separate Calendar) ---
+// --- Barber Selection (Per-Barber Separate Calendar) ---
 function selectBarber(barberName) {
     const barberInput = document.getElementById('selectedBarber');
     if (barberInput) barberInput.value = barberName;
 
     const bBahattin = document.getElementById('barberBahattin');
     const bTeam = document.getElementById('barberTeam');
-    const badge = document.getElementById('v7BarberNameBadge');
+    const badge = document.getElementById('r8BarberLiveName');
 
     if (barberName.includes('Bahattin')) {
-        if (bBahattin) bBahattin.classList.add('active');
-        if (bTeam) bTeam.classList.remove('active');
+        if (bBahattin) bBahattin.classList.add('selected');
+        if (bTeam) bTeam.classList.remove('selected');
         if (badge) badge.textContent = 'Bahattin';
     } else {
-        if (bBahattin) bBahattin.classList.remove('active');
-        if (bTeam) bTeam.classList.add('active');
+        if (bBahattin) bBahattin.classList.remove('selected');
+        if (bTeam) bTeam.classList.add('selected');
         if (badge) badge.textContent = (currentLang === 'tr' ? 'Finale Ekibi' : 'Finale Team');
     }
 
@@ -475,7 +475,7 @@ function clearTimeSlots() {
     if (container) {
         const dict = translations[currentLang];
         container.innerHTML = `
-            <div class="v7-slots-empty">
+            <div class="r8-slots-empty">
                 <i class="fa-solid fa-calendar-day"></i>
                 <span>${dict.timeSlotPlaceholder}</span>
             </div>
@@ -521,7 +521,7 @@ function renderTimeSlots(dateStr, dayOfWeek) {
     slots.forEach(time => {
         const btn = document.createElement('button');
         btn.type = 'button';
-        btn.className = 'v7-slot';
+        btn.className = 'r8-slot-btn';
 
         const [slotH, slotM] = time.split(':').map(Number);
         let isPast = false;
@@ -544,7 +544,7 @@ function renderTimeSlots(dateStr, dayOfWeek) {
         } else {
             btn.innerHTML = `<span>${time}</span><small>${currentLang === 'tr' ? 'M\u00fcsait' : 'Frei'}</small>`;
             btn.addEventListener('click', () => {
-                document.querySelectorAll('.v7-slot').forEach(b => b.classList.remove('selected'));
+                document.querySelectorAll('.r8-slot-btn').forEach(b => b.classList.remove('selected'));
                 btn.classList.add('selected');
                 hiddenInput.value = time;
             });
