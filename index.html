@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Stylesheet with Cache Buster -->
-    <link rel="stylesheet" href="style.css?v=5.0">
+    <link rel="stylesheet" href="style.css?v=6.0">
 </head>
 <body>
 
@@ -310,121 +310,136 @@
             </div>
         </section>
 
-        <!-- BOOKING SECTION (MOBILE-FIRST CLEAN FLAT ARCHITECTURE) -->
-        <section id="booking" class="booking-section">
+        <!-- BRAND NEW MOBILE-PERFECT BOOKING SECTION (V6) -->
+        <section id="booking" class="v6-booking-section">
             <div class="container">
-                <div class="m-booking-box">
-                    <div class="m-booking-header">
-                        <span class="m-booking-tag" data-i18n="bookingTag">ONLINE RESERVIERUNG</span>
-                        <h2 class="m-booking-title" data-i18n="bookingTitle">Wunschtermin Vereinbaren</h2>
-                        <p class="m-booking-sub" data-i18n="bookingSub">W&auml;hlen Sie Ihren Barber, Datum und Uhrzeit aus.</p>
+                <div class="v6-card">
+                    <!-- Card Top Header -->
+                    <div class="v6-card-header text-center">
+                        <div class="v6-tag"><i class="fa-solid fa-scissors"></i> <span data-i18n="bookingTag">ONLINE RESERVIERUNG</span></div>
+                        <h2 class="v6-title" data-i18n="bookingTitle">Wunschtermin Vereinbaren</h2>
+                        <p class="v6-subtitle" data-i18n="bookingSub">W&auml;hlen Sie Ihren Barber, Datum und Uhrzeit aus.</p>
                     </div>
 
-                    <!-- Salon Closed Banner -->
-                    <div id="salonClosedNotice" class="m-closed-alert" style="display:none;">
-                        <i class="fa-solid fa-circle-exclamation"></i>
+                    <!-- Closed Alert -->
+                    <div id="salonClosedNotice" class="v6-closed-alert" style="display:none;">
+                        <i class="fa-solid fa-store-slash"></i>
                         <div>
                             <strong data-i18n="salonClosedTitle">Salon ist derzeit geschlossen</strong>
                             <p data-i18n="salonClosedDesc">Derzeit k&ouml;nnen online keine Termine vereinbart werden.</p>
                         </div>
                     </div>
 
-                    <form id="booking-form" class="m-booking-form">
+                    <form id="booking-form" class="v6-form">
                         
-                        <!-- 1. BERBER SECIMI (AYRI TAKVIM) -->
-                        <div class="m-step">
-                            <div class="m-step-title">
-                                <span class="m-step-badge">1</span>
+                        <!-- 1. BARBER SELECTION (SEGMENTED TABS) -->
+                        <div class="v6-section-block">
+                            <label class="v6-label">
+                                <span class="v6-badge">1</span>
                                 <span data-i18n="lblBarber">Friseur / Barber W&auml;hlen</span>
-                            </div>
-                            <div class="m-barbers-list">
-                                <div class="m-barber-item selected" id="barberBahattin" onclick="selectBarber('Bahattin')">
-                                    <div class="m-barber-icon"><i class="fa-solid fa-scissors"></i></div>
-                                    <div class="m-barber-info">
-                                        <div class="m-barber-name">Bahattin</div>
-                                        <div class="m-barber-desc" data-i18n="barber1Role">Usta Berber / Master Stylist</div>
+                            </label>
+                            <div class="v6-barber-grid">
+                                <div class="v6-barber-tab active" id="barberBahattin" onclick="selectBarber('Bahattin')">
+                                    <div class="v6-b-icon"><i class="fa-solid fa-user-tie"></i></div>
+                                    <div class="v6-b-meta">
+                                        <span class="v6-b-name">Bahattin</span>
+                                        <span class="v6-b-role" data-i18n="barber1Role">Usta Berber / Master</span>
                                     </div>
-                                    <div class="m-barber-radio"><i class="fa-solid fa-check"></i></div>
+                                    <div class="v6-b-check"><i class="fa-solid fa-check"></i></div>
                                 </div>
 
-                                <div class="m-barber-item" id="barberTeam" onclick="selectBarber('Finale Barber Team')">
-                                    <div class="m-barber-icon"><i class="fa-solid fa-users"></i></div>
-                                    <div class="m-barber-info">
-                                        <div class="m-barber-name">Finale Ekibi</div>
-                                        <div class="m-barber-desc" data-i18n="barber2Role">N&auml;chster freier Barber</div>
+                                <div class="v6-barber-tab" id="barberTeam" onclick="selectBarber('Finale Barber Team')">
+                                    <div class="v6-b-icon"><i class="fa-solid fa-users"></i></div>
+                                    <div class="v6-b-meta">
+                                        <span class="v6-b-name">Finale Ekibi</span>
+                                        <span class="v6-b-role" data-i18n="barber2Role">N&auml;chster freier Barber</span>
                                     </div>
-                                    <div class="m-barber-radio"><i class="fa-solid fa-check"></i></div>
+                                    <div class="v6-b-check"><i class="fa-solid fa-check"></i></div>
                                 </div>
                             </div>
                             <input type="hidden" id="selectedBarber" value="Bahattin" required>
                         </div>
 
-                        <!-- 2. HIZMET SECIMI -->
-                        <div class="m-step">
-                            <div class="m-step-title">
-                                <span class="m-step-badge">2</span>
+                        <!-- 2. SERVICE SELECTION -->
+                        <div class="v6-section-block">
+                            <label class="v6-label" for="serviceSelect">
+                                <span class="v6-badge">2</span>
                                 <span data-i18n="lblService">Gew&uuml;nschte Leistung</span>
+                            </label>
+                            <div class="v6-select-wrap">
+                                <select id="serviceSelect" class="v6-input" required>
+                                    <option value="" disabled selected data-i18n="phSelectService">Bitte Leistung w&auml;hlen...</option>
+                                    <optgroup label="Spezial-Pakete">
+                                        <option value="Paket 1: Waschen, Schneiden, Rasieren, F&ouml;hnen &amp; Stylen (33&euro;)">Paket 1 - Waschen, Schneiden, Rasieren, F&ouml;hnen &amp; Stylen (33&euro;)</option>
+                                        <option value="Paket 2: Waschen, Schneiden, Rasieren, F&ouml;hnen, Stylen &amp; Augenbrauen (38&euro;)">Paket 2 - Waschen, Schneiden, Rasieren, F&ouml;hnen, Stylen &amp; Augenbrauen (38&euro;)</option>
+                                        <option value="Paket 3: Waschen, Schneiden, Rasieren, F&ouml;hnen, Stylen, Augenbrauen, F&auml;rben (60&euro;)">Paket 3 - Komplett + F&auml;rben (Bart/Haare) (60&euro;)</option>
+                                    </optgroup>
+                                    <optgroup label="Einzelne Leistungen">
+                                        <option value="Trocken Haarschnitt (18&euro;)">Trocken Haarschnitt (18&euro;)</option>
+                                        <option value="Waschen, Schneiden, F&ouml;hnen (21&euro;)">Waschen, Schneiden, F&ouml;hnen (21&euro;)</option>
+                                        <option value="Bartrasur (12&euro;)">Bartrasur (12&euro;)</option>
+                                        <option value="Augenbrauen zupfen (7&euro;)">Augenbrauen zupfen (7&euro;)</option>
+                                        <option value="Kinder Haarschnitt bis 10 Jahre (15&euro;)">Kinder Haarschnitt bis 10 Jahre (15&euro;)</option>
+                                        <option value="Waschen, F&ouml;hnen, Stylen (7&euro;)">Waschen, F&ouml;hnen, Stylen (7&euro;)</option>
+                                        <option value="Bart / Haare F&auml;rben (20&euro;)">Bart / Haare F&auml;rben (20&euro;)</option>
+                                    </optgroup>
+                                </select>
                             </div>
-                            <select id="serviceSelect" class="m-input" required>
-                                <option value="" disabled selected data-i18n="phSelectService">Bitte Leistung w&auml;hlen...</option>
-                                <optgroup label="Spezial-Pakete">
-                                    <option value="Paket 1: Waschen, Schneiden, Rasieren, F&ouml;hnen &amp; Stylen (33&euro;)">Paket 1 - Waschen, Schneiden, Rasieren, F&ouml;hnen &amp; Stylen (33&euro;)</option>
-                                    <option value="Paket 2: Waschen, Schneiden, Rasieren, F&ouml;hnen, Stylen &amp; Augenbrauen (38&euro;)">Paket 2 - Waschen, Schneiden, Rasieren, F&ouml;hnen, Stylen &amp; Augenbrauen (38&euro;)</option>
-                                    <option value="Paket 3: Waschen, Schneiden, Rasieren, F&ouml;hnen, Stylen, Augenbrauen, F&auml;rben (60&euro;)">Paket 3 - Komplett + F&auml;rben (Bart/Haare) (60&euro;)</option>
-                                </optgroup>
-                                <optgroup label="Einzelne Leistungen">
-                                    <option value="Trocken Haarschnitt (18&euro;)">Trocken Haarschnitt (18&euro;)</option>
-                                    <option value="Waschen, Schneiden, F&ouml;hnen (21&euro;)">Waschen, Schneiden, F&ouml;hnen (21&euro;)</option>
-                                    <option value="Bartrasur (12&euro;)">Bartrasur (12&euro;)</option>
-                                    <option value="Augenbrauen zupfen (7&euro;)">Augenbrauen zupfen (7&euro;)</option>
-                                    <option value="Kinder Haarschnitt bis 10 Jahre (15&euro;)">Kinder Haarschnitt bis 10 Jahre (15&euro;)</option>
-                                    <option value="Waschen, F&ouml;hnen, Stylen (7&euro;)">Waschen, F&ouml;hnen, Stylen (7&euro;)</option>
-                                    <option value="Bart / Haare F&auml;rben (20&euro;)">Bart / Haare F&auml;rben (20&euro;)</option>
-                                </optgroup>
-                            </select>
                         </div>
 
-                        <!-- 3. TARIH SECIMI -->
-                        <div class="m-step">
-                            <div class="m-step-title">
-                                <span class="m-step-badge">3</span>
+                        <!-- 3. DATE SELECTION -->
+                        <div class="v6-section-block">
+                            <label class="v6-label" for="bookingDate">
+                                <span class="v6-badge">3</span>
                                 <span data-i18n="lblDate">Datum W&auml;hlen</span>
-                            </div>
-                            <input type="date" id="bookingDate" class="m-input" required>
-                            <small class="m-help" data-i18n="dateHelp">Sonntags ist der Salon geschlossen.</small>
+                            </label>
+                            <input type="date" id="bookingDate" class="v6-input" required>
+                            <span class="v6-hint" data-i18n="dateHelp">Sonntags ist der Salon geschlossen.</span>
                         </div>
 
-                        <!-- 4. SAAT SECIMI (SECILEN BERBERIN TAKVIMI) -->
-                        <div class="m-step">
-                            <div class="m-step-title">
-                                <span class="m-step-badge">4</span>
-                                <span><span data-i18n="lblTime">Uhrzeit W&auml;hlen</span> (<span id="activeBarberBadge" style="color:var(--primary-gold)">Bahattin</span>)</span>
-                            </div>
-                            <div id="timeSlotsContainer" class="m-slots-grid">
-                                <div class="m-slots-empty">
+                        <!-- 4. TIME SELECTION (PER BARBER) -->
+                        <div class="v6-section-block">
+                            <label class="v6-label">
+                                <span class="v6-badge">4</span>
+                                <span><span data-i18n="lblTime">Uhrzeit W&auml;hlen</span> &ndash; <strong id="v6BarberNameBadge" class="gold-text">Bahattin</strong></span>
+                            </label>
+                            <div id="timeSlotsContainer" class="v6-slots-grid">
+                                <div class="v6-slots-placeholder">
                                     <i class="fa-solid fa-calendar-day"></i>
-                                    <p data-i18n="timeSlotPlaceholder">Bitte w&auml;hlen Sie zuerst oben ein Datum aus.</p>
+                                    <span data-i18n="timeSlotPlaceholder">Bitte w&auml;hlen Sie zuerst oben ein Datum aus.</span>
                                 </div>
                             </div>
                             <input type="hidden" id="selectedTimeSlot" required>
                         </div>
 
-                        <!-- 5. ILETISIM BILGILERI -->
-                        <div class="m-step">
-                            <div class="m-step-title">
-                                <span class="m-step-badge">5</span>
+                        <!-- 5. CONTACT DETAILS -->
+                        <div class="v6-section-block">
+                            <label class="v6-label">
+                                <span class="v6-badge">5</span>
                                 <span>Ihre Kontaktdaten</span>
-                            </div>
-                            <div class="m-inputs-list">
-                                <input type="text" id="customerName" class="m-input" placeholder="Ihr Vor- &amp; Nachname" data-ph-i18n="phName" required>
-                                <input type="tel" id="customerPhone" class="m-input" placeholder="Telefonnummer" data-ph-i18n="phPhone" required>
-                                <input type="email" id="customerEmail" class="m-input" placeholder="E-Mail (F&uuml;r Best&auml;tigungscode)" data-ph-i18n="phEmail" required>
-                                <input type="text" id="customerNotes" class="m-input" placeholder="Anmerkungen (Optional)" data-ph-i18n="phNotes">
+                            </label>
+                            <div class="v6-inputs-stack">
+                                <div class="v6-input-field">
+                                    <i class="fa-regular fa-user"></i>
+                                    <input type="text" id="customerName" placeholder="Vor- &amp; Nachname" data-ph-i18n="phName" required>
+                                </div>
+                                <div class="v6-input-field">
+                                    <i class="fa-solid fa-phone"></i>
+                                    <input type="tel" id="customerPhone" placeholder="Telefonnummer" data-ph-i18n="phPhone" required>
+                                </div>
+                                <div class="v6-input-field">
+                                    <i class="fa-regular fa-envelope"></i>
+                                    <input type="email" id="customerEmail" placeholder="E-Mail Adresse" data-ph-i18n="phEmail" required>
+                                </div>
+                                <div class="v6-input-field">
+                                    <i class="fa-regular fa-note-sticky"></i>
+                                    <input type="text" id="customerNotes" placeholder="Anmerkungen (Optional)" data-ph-i18n="phNotes">
+                                </div>
                             </div>
                         </div>
 
-                        <!-- 6. SUBMIT BUTTON -->
-                        <button type="submit" class="m-submit-btn pulse-glow" id="submitBookingBtn">
+                        <!-- SUBMIT BUTTON -->
+                        <button type="submit" class="v6-submit-btn pulse-glow" id="submitBookingBtn">
                             <i class="fa-solid fa-check-circle"></i> <span data-i18n="btnConfirmBooking">Termin Jetzt Verbindlich Buchen</span>
                         </button>
                     </form>
@@ -584,6 +599,6 @@
     </div>
 
     <!-- JavaScript File with Cache Buster -->
-    <script src="script.js?v=5.0"></script>
+    <script src="script.js?v=6.0"></script>
 </body>
 </html>

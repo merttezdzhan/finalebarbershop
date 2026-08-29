@@ -1,5 +1,5 @@
 // ==========================================================================
-// FINALE BARBERSHOP - CLIENT JAVASCRIPT (SEPARATE BARBER CALENDAR)
+// FINALE BARBERSHOP - CLIENT JAVASCRIPT (V6 DYNAMIC SEPARATE CALENDARS)
 // ==========================================================================
 
 const BARBER_EMAIL = "Habapli7@gmail.com";
@@ -83,7 +83,7 @@ const translations = {
         bookingTitle: "Wunschtermin Vereinbaren",
         bookingSub: "W\u00e4hlen Sie Ihren Barber, Datum und Uhrzeit aus.",
         lblBarber: "Friseur / Barber W\u00e4hlen",
-        barber1Role: "Usta Berber / Master Stylist",
+        barber1Role: "Usta Berber / Master",
         barber2Role: "N\u00e4chster freier Barber",
         lblService: "Gew\u00fcnschte Leistung",
         phSelectService: "Bitte Leistung w\u00e4hlen...",
@@ -95,7 +95,7 @@ const translations = {
         phName: "z.B. Max Mustermann",
         lblPhone: "Telefonnummer",
         phPhone: "z.B. 0152 5164 9190",
-        lblEmail: "E-Mail (F\u00fcr Best\u00e4tigungscode)",
+        lblEmail: "E-Mail Adresse",
         phEmail: "z.B. max.mustermann@gmail.com",
         lblNotes: "Anmerkungen (Optional)",
         phNotes: "z.B. Besondere W\u00fcnsche...",
@@ -187,7 +187,7 @@ const translations = {
         bookingTitle: "Hemen Randevunuzu Olu\u015fturun",
         bookingSub: "Berberinizi, tarihi ve saati se\u00e7in.",
         lblBarber: "Berberinizi Se\u00e7in",
-        barber1Role: "Usta Berber / Master Stylist",
+        barber1Role: "Usta Berber / Master",
         barber2Role: "\u0130lk M\u00fcsait Usta / Ekip",
         lblService: "Almak \u0130stedi\u011finiz Hizmet",
         phSelectService: "L\u00fctfen bir hizmet se\u00e7iniz...",
@@ -199,7 +199,7 @@ const translations = {
         phName: "\u00d6rn: Ahmet Y\u0131lmaz",
         lblPhone: "Telefon Numaran\u0131z",
         phPhone: "\u00d6rn: 0152 5164 9190",
-        lblEmail: "E-Posta (Onay Kodu \u0130\u00e7in)",
+        lblEmail: "E-Posta Adresiniz",
         phEmail: "\u00d6rn: musteri@gmail.com",
         lblNotes: "Notunuz (\u0130ste\u011fe Ba\u011fl\u0131)",
         phNotes: "\u00d6rn: \u00d6zel sa\u00e7 modeli veya fade...",
@@ -391,26 +391,26 @@ function initMobileNav() {
     }
 }
 
-// --- Barber Selection (Separate Calendar per Barber) ---
+// --- Barber Selection (V6 Per-Barber Separate Calendar) ---
 function selectBarber(barberName) {
     const barberInput = document.getElementById('selectedBarber');
     if (barberInput) barberInput.value = barberName;
 
     const bBahattin = document.getElementById('barberBahattin');
     const bTeam = document.getElementById('barberTeam');
-    const badge = document.getElementById('activeBarberBadge');
+    const badge = document.getElementById('v6BarberNameBadge');
 
     if (barberName.includes('Bahattin')) {
-        if (bBahattin) bBahattin.classList.add('selected');
-        if (bTeam) bTeam.classList.remove('selected');
+        if (bBahattin) bBahattin.classList.add('active');
+        if (bTeam) bTeam.classList.remove('active');
         if (badge) badge.textContent = 'Bahattin';
     } else {
-        if (bBahattin) bBahattin.classList.remove('selected');
-        if (bTeam) bTeam.classList.add('selected');
+        if (bBahattin) bBahattin.classList.remove('active');
+        if (bTeam) bTeam.classList.add('active');
         if (badge) badge.textContent = (currentLang === 'tr' ? 'Finale Ekibi' : 'Finale Team');
     }
 
-    // Re-render time slots for currently selected date
+    // Immediately re-render time slots for currently selected date
     const dateInput = document.getElementById('bookingDate');
     if (dateInput && dateInput.value) {
         const selectedDate = new Date(dateInput.value + 'T00:00:00');
@@ -475,9 +475,9 @@ function clearTimeSlots() {
     if (container) {
         const dict = translations[currentLang];
         container.innerHTML = `
-            <div class="m-slots-empty">
+            <div class="v6-slots-placeholder">
                 <i class="fa-solid fa-calendar-day"></i>
-                <p>${dict.timeSlotPlaceholder}</p>
+                <span>${dict.timeSlotPlaceholder}</span>
             </div>
         `;
     }
@@ -521,7 +521,7 @@ function renderTimeSlots(dateStr, dayOfWeek) {
     slots.forEach(time => {
         const btn = document.createElement('button');
         btn.type = 'button';
-        btn.className = 'm-slot-btn';
+        btn.className = 'v6-slot-btn';
 
         const [slotH, slotM] = time.split(':').map(Number);
         let isPast = false;
@@ -544,7 +544,7 @@ function renderTimeSlots(dateStr, dayOfWeek) {
         } else {
             btn.innerHTML = `<span>${time}</span><small>${currentLang === 'tr' ? 'M\u00fcsait' : 'Frei'}</small>`;
             btn.addEventListener('click', () => {
-                document.querySelectorAll('.m-slot-btn').forEach(b => b.classList.remove('selected'));
+                document.querySelectorAll('.v6-slot-btn').forEach(b => b.classList.remove('selected'));
                 btn.classList.add('selected');
                 hiddenInput.value = time;
             });

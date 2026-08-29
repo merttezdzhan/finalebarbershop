@@ -1,10 +1,10 @@
 ﻿/* ==========================================================================
-   DER FINALE BARBERSHOP - LUXURY MODERN STYLESHEET (MOBILE FIRST CLEAN)
+   DER FINALE BARBERSHOP - LUXURY MODERN STYLESHEET (V6 NEW DESIGN)
    ========================================================================== */
 
 :root {
     --bg-dark: #06070a;
-    --bg-card: rgba(12, 13, 16, 0.92);
+    --bg-card: rgba(12, 13, 16, 0.94);
     --bg-card-hover: rgba(18, 20, 26, 0.98);
     --primary-gold: #d4af37;
     --primary-gold-hover: #b89628;
@@ -19,15 +19,15 @@
     --font-heading: 'Outfit', sans-serif;
     --font-body: 'Plus Jakarta Sans', sans-serif;
     --radius-sm: 6px;
-    --radius-md: 10px;
-    --radius-lg: 16px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
     --radius-full: 9999px;
     --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.7);
     --shadow-gold: 0 0 25px rgba(212, 175, 55, 0.25);
 }
 
-/* Global Reset & Strict Zero-Overflow */
+/* Reset & Strict Zero-Overflow */
 *, *::before, *::after {
     margin: 0;
     padding: 0;
@@ -86,7 +86,7 @@ button, input, select, textarea {
     padding: 0 1.2rem;
 }
 
-/* Glassmorphism */
+/* Glassmorphism Classes */
 .glass-panel {
     background: var(--bg-card);
     backdrop-filter: blur(16px);
@@ -108,6 +108,10 @@ button, input, select, textarea {
     background: linear-gradient(135deg, #fff2b2 0%, #d4af37 50%, #aa8010 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+.gold-text {
+    color: var(--primary-gold);
 }
 
 /* Badges */
@@ -198,17 +202,6 @@ button, input, select, textarea {
 .btn-lg {
     padding: 0.85rem 1.8rem;
     font-size: 1rem;
-}
-
-.btn-xl {
-    padding: 0.95rem 1.8rem;
-    font-size: 1.05rem;
-    font-weight: 700;
-}
-
-.btn-sm {
-    padding: 0.4rem 0.9rem;
-    font-size: 0.82rem;
 }
 
 .pulse-glow {
@@ -785,175 +778,183 @@ button, input, select, textarea {
 }
 
 /* ==========================================================================
-   MOBILE-FIRST CLEAN BOOKING BOX (ZERO CRAMP - 100% FIT)
+   V6 BRAND NEW LUXURY BOOKING DESIGN (ZERO OVERFLOW - 100% RESPONSIVE)
    ========================================================================== */
-.booking-section {
-    padding: 4rem 0;
+.v6-booking-section {
+    padding: 4.5rem 0;
     width: 100%;
 }
 
-.m-booking-box {
-    background: #090a0e;
+.v6-card {
+    background: #08090d;
     border: 1px solid var(--border-gold);
     border-radius: var(--radius-md);
     padding: 2.2rem 1.8rem;
-    max-width: 620px;
-    margin: 0 auto;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.8), 0 0 30px rgba(212, 175, 55, 0.12);
     width: 100%;
+    max-width: 580px;
+    margin: 0 auto;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.8), 0 0 35px rgba(212, 175, 55, 0.15);
 }
 
-.m-booking-header {
-    text-align: center;
+.v6-card-header {
     margin-bottom: 1.8rem;
 }
 
-.m-booking-tag {
+.v6-tag {
     font-family: var(--font-heading);
     font-size: 0.75rem;
     font-weight: 800;
-    color: var(--primary-gold);
     letter-spacing: 1.5px;
-    display: block;
+    color: var(--primary-gold);
     margin-bottom: 0.3rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
 }
 
-.m-booking-title {
+.v6-title {
     font-size: 1.8rem;
     font-weight: 800;
     color: #fff;
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.3rem;
 }
 
-.m-booking-sub {
+.v6-subtitle {
     font-size: 0.88rem;
     color: var(--text-secondary);
 }
 
-.m-booking-form {
+.v6-form {
     display: flex;
     flex-direction: column;
-    gap: 1.4rem;
+    gap: 1.3rem;
     width: 100%;
 }
 
-.m-step {
+.v6-section-block {
     display: flex;
     flex-direction: column;
     gap: 0.6rem;
     width: 100%;
 }
 
-.m-step-title {
+.v6-label {
     display: flex;
     align-items: center;
-    gap: 0.6rem;
+    gap: 0.5rem;
     font-family: var(--font-heading);
     font-size: 0.95rem;
     font-weight: 700;
     color: #fff;
 }
 
-.m-step-badge {
-    background: var(--primary-gold);
-    color: #000;
-    font-size: 0.8rem;
-    font-weight: 900;
+.v6-badge {
     width: 22px;
     height: 22px;
+    background: var(--primary-gold);
+    color: #000;
     border-radius: 50%;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 900;
     flex-shrink: 0;
 }
 
-/* Barber List */
-.m-barbers-list {
-    display: flex;
-    flex-direction: column;
+/* Barber Segmented Tabs */
+.v6-barber-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 0.6rem;
     width: 100%;
 }
 
-.m-barber-item {
+.v6-barber-tab {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid var(--border-light);
     border-radius: var(--radius-sm);
-    padding: 0.85rem 1rem;
+    padding: 0.8rem 0.7rem;
     display: flex;
     align-items: center;
-    gap: 0.9rem;
+    gap: 0.6rem;
     cursor: pointer;
     transition: var(--transition);
     user-select: none;
+    position: relative;
     width: 100%;
 }
 
-.m-barber-item:hover {
-    background: rgba(212, 175, 55, 0.06);
+.v6-barber-tab:hover {
     border-color: var(--primary-gold);
+    background: rgba(212, 175, 55, 0.05);
 }
 
-.m-barber-item.selected {
+.v6-barber-tab.active {
     background: rgba(212, 175, 55, 0.12);
     border: 1.5px solid var(--primary-gold);
-    box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.25);
 }
 
-.m-barber-icon {
-    width: 40px;
-    height: 40px;
+.v6-b-icon {
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     background: rgba(212, 175, 55, 0.15);
     border: 1px solid var(--primary-gold);
+    color: var(--primary-gold);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.1rem;
-    color: var(--primary-gold);
+    font-size: 1rem;
     flex-shrink: 0;
 }
 
-.m-barber-info {
-    flex-grow: 1;
+.v6-b-meta {
     min-width: 0;
+    flex: 1;
 }
 
-.m-barber-name {
+.v6-b-name {
     font-family: var(--font-heading);
-    font-size: 1.05rem;
+    font-size: 0.95rem;
     font-weight: 700;
     color: #fff;
+    display: block;
 }
 
-.m-barber-desc {
-    font-size: 0.75rem;
+.v6-b-role {
+    font-size: 0.68rem;
     color: var(--text-muted);
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.m-barber-radio {
-    width: 22px;
-    height: 22px;
+.v6-b-check {
+    width: 18px;
+    height: 18px;
     border-radius: 50%;
-    border: 1.5px solid var(--border-light);
+    background: transparent;
+    border: 1px solid var(--border-light);
+    color: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.75rem;
-    color: transparent;
+    font-size: 0.65rem;
     transition: var(--transition);
     flex-shrink: 0;
 }
 
-.m-barber-item.selected .m-barber-radio {
+.v6-barber-tab.active .v6-b-check {
     background: var(--primary-gold);
     border-color: var(--primary-gold);
     color: #000;
 }
 
 /* Inputs */
-.m-input {
+.v6-input {
     width: 100% !important;
     background: rgba(14, 16, 22, 0.95);
     border: 1px solid var(--border-light);
@@ -965,33 +966,33 @@ button, input, select, textarea {
     transition: var(--transition);
 }
 
-.m-input:focus {
+.v6-input:focus {
     border-color: var(--primary-gold);
     box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
 }
 
-.m-input option {
+.v6-input option {
     background: #12141c;
     color: #fff;
 }
 
-.m-help {
+.v6-hint {
     font-size: 0.75rem;
     color: var(--text-muted);
 }
 
 /* Time Slots Grid */
-.m-slots-grid {
+.v6-slots-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 0.45rem;
-    max-height: 180px;
+    max-height: 190px;
     overflow-y: auto;
     padding-right: 0.2rem;
     width: 100%;
 }
 
-.m-slot-btn {
+.v6-slot-btn {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid var(--border-light);
     border-radius: var(--radius-sm);
@@ -1005,46 +1006,46 @@ button, input, select, textarea {
     touch-action: manipulation;
 }
 
-.m-slot-btn span {
+.v6-slot-btn span {
     font-family: var(--font-heading);
     font-size: 0.88rem;
     font-weight: 700;
 }
 
-.m-slot-btn small {
+.v6-slot-btn small {
     font-size: 0.62rem;
     color: var(--status-open);
 }
 
-.m-slot-btn:hover:not(:disabled) {
+.v6-slot-btn:hover:not(:disabled) {
     border-color: var(--primary-gold);
     background: rgba(212, 175, 55, 0.12);
 }
 
-.m-slot-btn.selected {
+.v6-slot-btn.selected {
     background: var(--primary-gold) !important;
     color: #000 !important;
     border-color: var(--primary-gold) !important;
-    box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
 }
 
-.m-slot-btn.selected small {
+.v6-slot-btn.selected small {
     color: #000 !important;
     font-weight: 700;
 }
 
-.m-slot-btn:disabled, .m-slot-btn.booked, .m-slot-btn.past {
+.v6-slot-btn:disabled, .v6-slot-btn.booked, .v6-slot-btn.past {
     opacity: 0.3;
     cursor: not-allowed;
     border-color: transparent;
     background: rgba(255, 255, 255, 0.02);
 }
 
-.m-slot-btn.booked small, .m-slot-btn.past small {
+.v6-slot-btn.booked small, .v6-slot-btn.past small {
     color: var(--status-closed);
 }
 
-.m-slots-empty {
+.v6-slots-placeholder {
     grid-column: 1 / -1;
     text-align: center;
     padding: 1.5rem 1rem;
@@ -1052,30 +1053,65 @@ button, input, select, textarea {
     font-size: 0.85rem;
 }
 
-.m-slots-empty i {
+.v6-slots-placeholder i {
     font-size: 1.8rem;
     color: var(--primary-gold);
     margin-bottom: 0.4rem;
     display: block;
 }
 
-/* Contact Inputs List */
-.m-inputs-list {
+/* Contact Inputs Stack */
+.v6-inputs-stack {
     display: flex;
     flex-direction: column;
     gap: 0.6rem;
     width: 100%;
 }
 
+.v6-input-field {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.v6-input-field i {
+    position: absolute;
+    left: 1rem;
+    color: var(--primary-gold);
+    font-size: 0.95rem;
+    pointer-events: none;
+}
+
+.v6-input-field input {
+    width: 100% !important;
+    padding-left: 2.7rem !important;
+    background: rgba(14, 16, 22, 0.95);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm);
+    padding-top: 0.85rem;
+    padding-bottom: 0.85rem;
+    padding-right: 1rem;
+    color: #fff;
+    font-size: 16px;
+    outline: none;
+    transition: var(--transition);
+}
+
+.v6-input-field input:focus {
+    border-color: var(--primary-gold);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+}
+
 /* Submit Button */
-.m-submit-btn {
+.v6-submit-btn {
     width: 100%;
     background: linear-gradient(135deg, #d4af37 0%, #b89628 100%);
     color: #000;
     font-family: var(--font-heading);
     font-weight: 800;
     font-size: 1.05rem;
-    padding: 1rem 1.5rem;
+    padding: 1.1rem 1.5rem;
     border: none;
     border-radius: var(--radius-sm);
     cursor: pointer;
@@ -1087,13 +1123,13 @@ button, input, select, textarea {
     transition: var(--transition);
 }
 
-.m-submit-btn:hover {
+.v6-submit-btn:hover {
     background: linear-gradient(135deg, #e5c14e 0%, #c9a334 100%);
     transform: translateY(-2px);
     box-shadow: 0 0 25px rgba(212, 175, 55, 0.5);
 }
 
-.m-closed-alert {
+.v6-closed-alert {
     background: rgba(239, 68, 68, 0.15);
     border: 1px solid rgba(239, 68, 68, 0.4);
     color: #fca5a5;
@@ -1105,18 +1141,18 @@ button, input, select, textarea {
     margin-bottom: 1.2rem;
 }
 
-.m-closed-alert i {
+.v6-closed-alert i {
     font-size: 1.5rem;
     color: #ef4444;
 }
 
-.m-closed-alert strong {
+.v6-closed-alert strong {
     font-size: 0.95rem;
     color: #fff;
     display: block;
 }
 
-.m-closed-alert p {
+.v6-closed-alert p {
     font-size: 0.8rem;
     margin: 0;
 }
@@ -1390,7 +1426,7 @@ button, input, select, textarea {
 }
 
 /* ==========================================================================
-   RESPONSIVE MEDIA QUERIES (MOBILE PHONE OPTIMIZATIONS)
+   RESPONSIVE RULES (MOBILE OPTIMIZATIONS)
    ========================================================================== */
 @media (max-width: 992px) {
     .nav-menu {
@@ -1436,7 +1472,7 @@ button, input, select, textarea {
 /* MOBILE PHONES <= 768px */
 @media (max-width: 768px) {
     .container {
-        padding: 0 0.75rem !important;
+        padding: 0 0.8rem !important;
         width: 100% !important;
     }
 
@@ -1481,34 +1517,45 @@ button, input, select, textarea {
         font-size: 1.75rem;
     }
 
-    /* MOBILE BOOKING BOX */
-    .booking-section {
-        padding: 2rem 0 !important;
+    /* V6 CARD MOBILE FIT */
+    .v6-booking-section {
+        padding: 2.2rem 0 !important;
     }
 
-    .m-booking-box {
-        padding: 1.2rem 0.9rem !important;
+    .v6-card {
+        padding: 1.3rem 0.9rem !important;
         border-radius: var(--radius-sm) !important;
     }
 
-    .m-booking-title {
-        font-size: 1.5rem;
+    .v6-title {
+        font-size: 1.55rem;
     }
 
-    .m-slots-grid {
+    /* Berber Tabs on Mobile: Dikey Alt Alta */
+    .v6-barber-grid {
+        grid-template-columns: 1fr !important;
+        gap: 0.55rem !important;
+    }
+
+    .v6-barber-tab {
+        padding: 0.75rem 0.8rem !important;
+    }
+
+    /* Saat Grid: 4 EÅŸit SÃ¼tun */
+    .v6-slots-grid {
         grid-template-columns: repeat(4, 1fr) !important;
         gap: 0.35rem !important;
     }
 
-    .m-slot-btn {
+    .v6-slot-btn {
         padding: 0.45rem 0.1rem !important;
     }
 
-    .m-slot-btn span {
+    .v6-slot-btn span {
         font-size: 0.82rem !important;
     }
 
-    .m-slot-btn small {
+    .v6-slot-btn small {
         font-size: 0.58rem !important;
     }
 
@@ -1524,7 +1571,7 @@ button, input, select, textarea {
 
 /* SMALL PHONES <= 380px */
 @media (max-width: 380px) {
-    .m-slots-grid {
+    .v6-slots-grid {
         grid-template-columns: repeat(3, 1fr) !important;
     }
 }
