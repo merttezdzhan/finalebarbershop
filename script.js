@@ -1,5 +1,5 @@
 // ==========================================================================
-// FINALE BARBERSHOP - CLIENT JAVASCRIPT (V6 DYNAMIC SEPARATE CALENDARS)
+// FINALE BARBERSHOP - CLIENT JAVASCRIPT (V7 PURE SEPARATE CALENDARS)
 // ==========================================================================
 
 const BARBER_EMAIL = "Habapli7@gmail.com";
@@ -391,14 +391,14 @@ function initMobileNav() {
     }
 }
 
-// --- Barber Selection (V6 Per-Barber Separate Calendar) ---
+// --- Barber Selection (V7 Per-Barber Separate Calendar) ---
 function selectBarber(barberName) {
     const barberInput = document.getElementById('selectedBarber');
     if (barberInput) barberInput.value = barberName;
 
     const bBahattin = document.getElementById('barberBahattin');
     const bTeam = document.getElementById('barberTeam');
-    const badge = document.getElementById('v6BarberNameBadge');
+    const badge = document.getElementById('v7BarberNameBadge');
 
     if (barberName.includes('Bahattin')) {
         if (bBahattin) bBahattin.classList.add('active');
@@ -475,7 +475,7 @@ function clearTimeSlots() {
     if (container) {
         const dict = translations[currentLang];
         container.innerHTML = `
-            <div class="v6-slots-placeholder">
+            <div class="v7-slots-empty">
                 <i class="fa-solid fa-calendar-day"></i>
                 <span>${dict.timeSlotPlaceholder}</span>
             </div>
@@ -521,7 +521,7 @@ function renderTimeSlots(dateStr, dayOfWeek) {
     slots.forEach(time => {
         const btn = document.createElement('button');
         btn.type = 'button';
-        btn.className = 'v6-slot-btn';
+        btn.className = 'v7-slot';
 
         const [slotH, slotM] = time.split(':').map(Number);
         let isPast = false;
@@ -544,7 +544,7 @@ function renderTimeSlots(dateStr, dayOfWeek) {
         } else {
             btn.innerHTML = `<span>${time}</span><small>${currentLang === 'tr' ? 'M\u00fcsait' : 'Frei'}</small>`;
             btn.addEventListener('click', () => {
-                document.querySelectorAll('.v6-slot-btn').forEach(b => b.classList.remove('selected'));
+                document.querySelectorAll('.v7-slot').forEach(b => b.classList.remove('selected'));
                 btn.classList.add('selected');
                 hiddenInput.value = time;
             });
