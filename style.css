@@ -1,4 +1,4 @@
-﻿/* ==========================================================================
+/* ==========================================================================
    DER FINALE BARBERSHOP - LUXURY MODERN STYLESHEET (V9 REBUILT R8 ARCHITECTURE)
    ========================================================================== */
 
@@ -780,22 +780,23 @@ button, input, select, textarea {
 }
 
 /* ==========================================================================
-   ATELIER R8 LUXURY APPOINTMENT SECTION (V9 SHOWSTOPPER)
+   ATELIER R8 LUXURY APPOINTMENT SECTION (V10 PHONE-FIRST PERFECT)
    ========================================================================== */
 .booking-atelier-section {
-    padding: 4.5rem 0;
+    padding: 3rem 0;
     width: 100%;
+    overflow-x: hidden !important;
 }
 
 .booking-atelier-card {
     background: #08090d;
     border: 1px solid var(--border-gold);
     border-radius: var(--radius-md);
-    padding: 2.2rem 1.8rem;
-    width: 100%;
-    max-width: 580px;
-    margin: 0 auto;
+    padding: 1.5rem 1rem;
+    width: 100% !important;
+    box-sizing: border-box !important;
     box-shadow: 0 15px 45px rgba(0, 0, 0, 0.85), 0 0 35px rgba(212, 175, 55, 0.15);
+    overflow: hidden !important;
 }
 
 .atelier-header {
