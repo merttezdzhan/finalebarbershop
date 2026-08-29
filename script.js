@@ -14,7 +14,7 @@ let salonSettings = {
     closeHour: "19:00"
 };
 
-// Multilingual Translation Dictionaries (with Unicode escapes for 100% character integrity)
+// Multilingual Translation Dictionaries
 const translations = {
     de: {
         docTitle: "Finale Barbershop | M\u00f6rfelden-Walldorf",
@@ -390,7 +390,7 @@ function initMobileNav() {
     }
 }
 
-// --- Barber Selection ---
+// --- Barber Selection (R8 Logic) ---
 function selectBarber(barberName) {
     const barberInput = document.getElementById('selectedBarber');
     if (barberInput) barberInput.value = barberName;
@@ -399,11 +399,19 @@ function selectBarber(barberName) {
     const bTeam = document.getElementById('barberTeam');
 
     if (barberName.includes('Bahattin')) {
-        if (bBahattin) bBahattin.classList.add('active');
-        if (bTeam) bTeam.classList.remove('active');
+        if (bBahattin) {
+            bBahattin.classList.add('selected', 'active');
+        }
+        if (bTeam) {
+            bTeam.classList.remove('selected', 'active');
+        }
     } else {
-        if (bBahattin) bBahattin.classList.remove('active');
-        if (bTeam) bTeam.classList.add('active');
+        if (bBahattin) {
+            bBahattin.classList.remove('selected', 'active');
+        }
+        if (bTeam) {
+            bTeam.classList.add('selected', 'active');
+        }
     }
 }
 
@@ -482,7 +490,6 @@ function renderTimeSlots(dateStr, dayOfWeek) {
     container.innerHTML = '';
 
     const startH = parseInt(salonSettings.openHour ? salonSettings.openHour.split(':')[0] : 9);
-    // Saturday ends at 18:00, Weekdays default 19:00 or from settings
     const endH = dayOfWeek === 6 ? 18 : parseInt(salonSettings.closeHour ? salonSettings.closeHour.split(':')[0] : 19);
 
     const now = new Date();

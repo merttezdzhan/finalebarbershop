@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <meta name="theme-color" content="#0a0b0e">
     <meta name="description" content="Finale Barbershop in M&ouml;rfelden-Walldorf - Professionelle Herrenhaarschnitte, Fades und pr&auml;zise Bartpflege. Besuche mit und ohne Termin in der Westendstra&szlig;e 3.">
     <title data-i18n="docTitle">Finale Barbershop | M&ouml;rfelden-Walldorf</title>
@@ -10,7 +10,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -206,9 +206,9 @@
                     <p class="section-subtitle" data-i18n="servicesSub">Erstklassige Qualit&auml;t zu fairen Preisen. W&auml;hlen Sie Ihre gew&uuml;nschte Leistung oder eines unserer Spar-Pakete.</p>
                 </div>
 
-                <!-- Special Packages Grid (Paket 1, Paket 2, Paket 3) -->
-                <div class="packages-header text-center" style="margin-bottom: 2rem;">
-                    <h3 class="gold-gradient" style="font-size: 1.6rem; font-weight: 800;" data-i18n="packagesTitle">Spezial Spar-Pakete</h3>
+                <!-- Special Packages Grid -->
+                <div class="packages-header text-center" style="margin-bottom: 1.8rem;">
+                    <h3 class="gold-gradient" style="font-size: 1.5rem; font-weight: 800;" data-i18n="packagesTitle">Spezial Spar-Pakete</h3>
                 </div>
 
                 <div class="services-cards-grid packages-grid">
@@ -249,7 +249,7 @@
                     </div>
                 </div>
 
-                <!-- Complete Individual Price List Table (7 items) -->
+                <!-- Complete Individual Price List Table -->
                 <div class="price-list-container glass-panel">
                     <h3 class="price-table-title" data-i18n="fullPriceTitle"><i class="fa-solid fa-list"></i> Einzelne Leistungen &amp; Preise</h3>
                     <div class="price-items-grid">
@@ -307,10 +307,10 @@
             </div>
         </section>
 
-        <!-- Booking Section -->
+        <!-- BOOKING SECTION (R8-STYLE ATELIER WIZARD - 100% PERFECT MOBILE FIT) -->
         <section id="booking" class="booking-section">
             <div class="container">
-                <div class="booking-wrapper glass-panel">
+                <div class="booking-atelier-frame">
                     <div class="booking-header text-center">
                         <div class="section-tag" data-i18n="bookingTag">ONLINE RESERVIERUNG</div>
                         <h2 class="section-title" data-i18n="bookingTitle">Wunschtermin Vereinbaren</h2>
@@ -326,38 +326,53 @@
                         </div>
                     </div>
 
-                    <form id="booking-form" class="booking-form">
-                        <div class="form-grid">
-
-                            <!-- Barber Selection Cards -->
-                            <div class="form-group full-width">
-                                <label><i class="fa-solid fa-user-tie"></i> <span data-i18n="lblBarber">W&auml;hlen Sie Ihren Barber</span></label>
-                                <div class="barber-selection-grid">
-                                    <div class="barber-card active" id="barberBahattin" onclick="selectBarber('Bahattin')">
-                                        <div class="barber-avatar"><i class="fa-solid fa-scissors"></i></div>
-                                        <div class="barber-info">
-                                            <h4>Bahattin</h4>
-                                            <span data-i18n="barber1Role">Usta Berber / Master Stylist</span>
-                                        </div>
-                                        <i class="fa-solid fa-circle-check barber-check-icon"></i>
-                                    </div>
-                                    <div class="barber-card" id="barberTeam" onclick="selectBarber('Finale Barber Team')">
-                                        <div class="barber-avatar"><i class="fa-solid fa-users"></i></div>
-                                        <div class="barber-info">
-                                            <h4>Finale Barber Team</h4>
-                                            <span data-i18n="barber2Role">N&auml;chster freier Barber</span>
-                                        </div>
-                                        <i class="fa-solid fa-circle-check barber-check-icon"></i>
-                                    </div>
-                                </div>
-                                <input type="hidden" id="selectedBarber" value="Bahattin" required>
+                    <form id="booking-form" class="atelier-booking-wizard">
+                        
+                        <!-- STEP 1: Barber Selection -->
+                        <div class="wizard-step-box">
+                            <div class="step-badge-title">
+                                <span class="step-num">01</span>
+                                <h3 data-i18n="lblBarber">W&auml;hlen Sie Ihren Barber</h3>
                             </div>
 
-                            <!-- Service Select -->
-                            <div class="form-group">
-                                <label for="serviceSelect">
-                                    <i class="fa-solid fa-scissors"></i> <span data-i18n="lblService">Gew&uuml;nschte Leistung</span>
-                                </label>
+                            <div class="barbers-selection-grid">
+                                <!-- Barber 1: Bahattin -->
+                                <div class="barber-card selected" id="barberBahattin" onclick="selectBarber('Bahattin')">
+                                    <div class="barber-select-check"><i class="fa-solid fa-check"></i></div>
+                                    <div class="barber-avatar-box">
+                                        <div class="barber-avatar-inner">
+                                            <i class="fa-solid fa-scissors"></i>
+                                        </div>
+                                    </div>
+                                    <h4 class="barber-name">Bahattin</h4>
+                                    <p class="barber-role" data-i18n="barber1Role">Usta Berber / Master Stylist</p>
+                                    <span class="barber-status-badge"><i class="fa-solid fa-circle"></i> Verf&uuml;gbar</span>
+                                </div>
+
+                                <!-- Barber 2: Finale Barber Team -->
+                                <div class="barber-card" id="barberTeam" onclick="selectBarber('Finale Barber Team')">
+                                    <div class="barber-select-check"><i class="fa-solid fa-check"></i></div>
+                                    <div class="barber-avatar-box">
+                                        <div class="barber-avatar-inner">
+                                            <i class="fa-solid fa-users"></i>
+                                        </div>
+                                    </div>
+                                    <h4 class="barber-name">Finale Ekibi</h4>
+                                    <p class="barber-role" data-i18n="barber2Role">N&auml;chster freier Barber</p>
+                                    <span class="barber-status-badge"><i class="fa-solid fa-circle"></i> Verf&uuml;gbar</span>
+                                </div>
+                            </div>
+                            <input type="hidden" id="selectedBarber" value="Bahattin" required>
+                        </div>
+
+                        <!-- STEP 2: Service Selection -->
+                        <div class="wizard-step-box">
+                            <div class="step-badge-title">
+                                <span class="step-num">02</span>
+                                <h3 data-i18n="lblService">Gew&uuml;nschte Leistung</h3>
+                            </div>
+
+                            <div class="form-group full-width">
                                 <select id="serviceSelect" class="form-control" required>
                                     <option value="" disabled selected data-i18n="phSelectService">Bitte Leistung w&auml;hlen...</option>
                                     <optgroup label="Spezial-Pakete">
@@ -376,66 +391,81 @@
                                     </optgroup>
                                 </select>
                             </div>
+                        </div>
 
-                            <!-- Date Picker (Past dates blocked) -->
-                            <div class="form-group">
-                                <label for="bookingDate">
-                                    <i class="fa-regular fa-calendar-days"></i> <span data-i18n="lblDate">Datum W&auml;hlen</span>
-                                </label>
-                                <input type="date" id="bookingDate" class="form-control" required>
-                                <small class="form-help-text" data-i18n="dateHelp">Sonntags ist der Salon geschlossen.</small>
+                        <!-- STEP 3: Date & Time Selection -->
+                        <div class="wizard-step-box">
+                            <div class="step-badge-title">
+                                <span class="step-num">03</span>
+                                <h3>Datum &amp; Uhrzeit</h3>
                             </div>
 
-                            <!-- Time Slot Selection Grid (Past hours blocked automatically) -->
-                            <div class="form-group full-width">
-                                <label>
-                                    <i class="fa-regular fa-clock"></i> <span data-i18n="lblTime">Freie Uhrzeit Ausw&auml;hlen</span>
-                                </label>
-                                <div id="timeSlotsContainer" class="time-slots-grid">
-                                    <div class="slots-placeholder">
-                                        <i class="fa-solid fa-calendar-day"></i>
-                                        <p data-i18n="timeSlotPlaceholder">Bitte w&auml;hlen Sie zuerst oben ein Datum aus, um die verf&uuml;gbaren Zeiten zu sehen.</p>
-                                    </div>
+                            <div class="form-grid">
+                                <div class="form-group full-width">
+                                    <label for="bookingDate">
+                                        <i class="fa-regular fa-calendar-days"></i> <span data-i18n="lblDate">Datum W&auml;hlen</span>
+                                    </label>
+                                    <input type="date" id="bookingDate" class="form-control" required>
+                                    <small class="form-help-text" data-i18n="dateHelp">Sonntags ist der Salon geschlossen.</small>
                                 </div>
-                                <input type="hidden" id="selectedTimeSlot" required>
-                            </div>
 
-                            <!-- Customer Name -->
-                            <div class="form-group">
-                                <label for="customerName">
-                                    <i class="fa-regular fa-user"></i> <span data-i18n="lblName">Ihr Vor- &amp; Nachname</span>
-                                </label>
-                                <input type="text" id="customerName" class="form-control" placeholder="z.B. Max Mustermann" data-ph-i18n="phName" required>
-                            </div>
-
-                            <!-- Customer Phone -->
-                            <div class="form-group">
-                                <label for="customerPhone">
-                                    <i class="fa-solid fa-phone"></i> <span data-i18n="lblPhone">Telefonnummer</span>
-                                </label>
-                                <input type="tel" id="customerPhone" class="form-control" placeholder="z.B. 0152 5164 9190" data-ph-i18n="phPhone" required>
-                            </div>
-
-                            <!-- Customer Email (for booking code confirmation) -->
-                            <div class="form-group full-width">
-                                <label for="customerEmail">
-                                    <i class="fa-regular fa-envelope"></i> <span data-i18n="lblEmail">E-Mail Adresse (F&uuml;r Best&auml;tigungscode)</span>
-                                </label>
-                                <input type="email" id="customerEmail" class="form-control" placeholder="z.B. max.mustermann@gmail.com" data-ph-i18n="phEmail" required>
-                                <small class="form-help-text" data-i18n="emailHelp">Terminbest&auml;tigung und Ihr 6-stelliger Code werden an diese E-Mail gesendet.</small>
-                            </div>
-
-                            <!-- Customer Notes Optional -->
-                            <div class="form-group full-width">
-                                <label for="customerNotes">
-                                    <i class="fa-regular fa-note-sticky"></i> <span data-i18n="lblNotes">Anmerkungen (Optional)</span>
-                                </label>
-                                <input type="text" id="customerNotes" class="form-control" placeholder="z.B. Besondere W&uuml;nsche..." data-ph-i18n="phNotes">
+                                <div class="form-group full-width">
+                                    <label>
+                                        <i class="fa-regular fa-clock"></i> <span data-i18n="lblTime">Freie Uhrzeit Ausw&auml;hlen</span>
+                                    </label>
+                                    <div id="timeSlotsContainer" class="time-slots-grid">
+                                        <div class="slots-placeholder">
+                                            <i class="fa-solid fa-calendar-day"></i>
+                                            <p data-i18n="timeSlotPlaceholder">Bitte w&auml;hlen Sie zuerst oben ein Datum aus, um die verf&uuml;gbaren Zeiten zu sehen.</p>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" id="selectedTimeSlot" required>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="form-actions text-center">
-                            <button type="submit" class="btn btn-primary btn-xl pulse-glow" id="submitBookingBtn">
+                        <!-- STEP 4: Personal Details -->
+                        <div class="wizard-step-box">
+                            <div class="step-badge-title">
+                                <span class="step-num">04</span>
+                                <h3>Ihre Kontaktdaten</h3>
+                            </div>
+
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="customerName">
+                                        <i class="fa-regular fa-user"></i> <span data-i18n="lblName">Ihr Vor- &amp; Nachname</span>
+                                    </label>
+                                    <input type="text" id="customerName" class="form-control" placeholder="z.B. Max Mustermann" data-ph-i18n="phName" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="customerPhone">
+                                        <i class="fa-solid fa-phone"></i> <span data-i18n="lblPhone">Telefonnummer</span>
+                                    </label>
+                                    <input type="tel" id="customerPhone" class="form-control" placeholder="z.B. 0152 5164 9190" data-ph-i18n="phPhone" required>
+                                </div>
+
+                                <div class="form-group full-width">
+                                    <label for="customerEmail">
+                                        <i class="fa-regular fa-envelope"></i> <span data-i18n="lblEmail">E-Mail Adresse (F&uuml;r Best&auml;tigungscode)</span>
+                                    </label>
+                                    <input type="email" id="customerEmail" class="form-control" placeholder="z.B. max.mustermann@gmail.com" data-ph-i18n="phEmail" required>
+                                    <small class="form-help-text" data-i18n="emailHelp">Terminbest&auml;tigung und Ihr 6-stelliger Code werden an diese E-Mail gesendet.</small>
+                                </div>
+
+                                <div class="form-group full-width">
+                                    <label for="customerNotes">
+                                        <i class="fa-regular fa-note-sticky"></i> <span data-i18n="lblNotes">Anmerkungen (Optional)</span>
+                                    </label>
+                                    <input type="text" id="customerNotes" class="form-control" placeholder="z.B. Besondere W&uuml;nsche..." data-ph-i18n="phNotes">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SUBMIT BUTTON -->
+                        <div class="form-actions text-center" style="margin-top: 1.5rem;">
+                            <button type="submit" class="btn btn-primary btn-xl pulse-glow" id="submitBookingBtn" style="width:100%; max-width: 500px;">
                                 <i class="fa-solid fa-check-circle"></i> <span data-i18n="btnConfirmBooking">Termin Jetzt Verbindlich Buchen</span>
                             </button>
                         </div>

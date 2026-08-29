@@ -1,4 +1,4 @@
-﻿// ==========================================================================
+// ==========================================================================
 // FINALE BARBERSHOP - ADMIN MANAGEMENT SCRIPT
 // ==========================================================================
 
@@ -81,7 +81,7 @@ async function syncAllFromCloud(showFeedback = false) {
     updateStats();
 
     if (showFeedback) {
-        alert("Randevular ve ayarlar buluttan baÅŸarÄ±yla gÃ¼ncellendi!");
+        alert("Randevular ve ayarlar buluttan ba\u015far\u0131yla g\u00fcncellendi!");
     }
 }
 
@@ -98,7 +98,7 @@ function updateSalonUI() {
     if (salonConfig.isOpen) {
         toggleBtn.className = 'status-switch-btn open';
         toggleIcon.className = 'fa-solid fa-circle-check';
-        toggleText.textContent = 'SALON AÃ‡IK (Randevu AlÄ±nabilir)';
+        toggleText.textContent = 'SALON A\u00c7IK (Randevu Al\u0131nabilir)';
     } else {
         toggleBtn.className = 'status-switch-btn closed';
         toggleIcon.className = 'fa-solid fa-ban';
@@ -116,7 +116,7 @@ async function saveHoursSettings() {
     salonConfig.openHour = document.getElementById('openHourSelect').value;
     salonConfig.closeHour = document.getElementById('closeHourSelect').value;
     await saveCloudSettings();
-    alert(`Ã‡alÄ±ÅŸma saatleri ${salonConfig.openHour} â€“ ${salonConfig.closeHour} olarak kaydedildi!`);
+    alert(`\u00c7al\u0131\u015fma saatleri ${salonConfig.openHour} \u2013 ${salonConfig.closeHour} olarak kaydedildi!`);
 }
 
 async function saveCloudSettings() {
@@ -147,7 +147,7 @@ function renderAppointmentsTable(list) {
     if (!tbody) return;
 
     if (!list || list.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; padding: 2.5rem; color: var(--text-muted);">HenÃ¼z randevu bulunmamaktadÄ±r.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; padding: 2.5rem; color: var(--text-muted);">Hen\u00fcz randevu bulunmamaktad\u0131r.</td></tr>`;
         return;
     }
 
@@ -158,8 +158,8 @@ function renderAppointmentsTable(list) {
         const code = apt.authCode || 'FN-000000';
 
         let statusClass = 'offen';
-        if (apt.status === 'OnaylandÄ±') statusClass = 'onaylandi';
-        if (apt.status === 'Ä°ptal Edildi') statusClass = 'iptal';
+        if (apt.status === 'Onayland\u0131' || apt.status === 'Onaylandi') statusClass = 'onaylandi';
+        if (apt.status === '\u0130ptal Edildi' || apt.status === 'Iptal Edildi') statusClass = 'iptal';
 
         return `
             <tr>
@@ -189,10 +189,10 @@ function renderAppointmentsTable(list) {
                 </td>
                 <td>
                     <div class="action-btns">
-                        <button class="btn-action confirm" title="Randevuyu Onayla ve MÃ¼ÅŸteriye Kod GÃ¶nder" onclick="confirmAppointment('${apt.id}')">
+                        <button class="btn-action confirm" title="Randevuyu Onayla ve M\u00fc\u015fteriye Kod G\u00f6nder" onclick="confirmAppointment('${apt.id}')">
                             <i class="fa-solid fa-check"></i>
                         </button>
-                        <button class="btn-action cancel" title="Ä°ptal Et" onclick="cancelAppointment('${apt.id}')">
+                        <button class="btn-action cancel" title="\u0130ptal Et" onclick="cancelAppointment('${apt.id}')">
                             <i class="fa-solid fa-ban"></i>
                         </button>
                         <button class="btn-action delete" title="Sil" onclick="deleteAppointment('${apt.id}')">
@@ -210,7 +210,7 @@ async function confirmAppointment(id) {
     const apt = allAppointments.find(a => a.id === id);
     if (!apt) return;
 
-    apt.status = 'OnaylandÄ±';
+    apt.status = 'Onayland\u0131';
     saveLocal();
     await saveCloudSettings();
     renderAppointmentsTable(allAppointments);
@@ -219,9 +219,9 @@ async function confirmAppointment(id) {
     // Send confirmation email to customer if email is provided
     if (apt.email && apt.email.includes('@')) {
         await sendCustomerConfirmationEmail(apt);
-        alert(`Randevu onaylandÄ±! MÃ¼ÅŸteriye (${apt.email}) ${apt.authCode} gÃ¼venlik kodunu iÃ§eren onay maili iletildi.`);
+        alert(`Randevu onayland\u0131! M\u00fc\u015fteriye (${apt.email}) ${apt.authCode} g\u00fcvenlik kodunu i\u00e7eren onay maili iletildi.`);
     } else {
-        alert(`Randevu onaylandÄ±! GÃ¼venlik Kodu: ${apt.authCode}`);
+        alert(`Randevu onayland\u0131! G\u00fcvenlik Kodu: ${apt.authCode}`);
     }
 }
 
@@ -229,7 +229,7 @@ async function cancelAppointment(id) {
     const apt = allAppointments.find(a => a.id === id);
     if (!apt) return;
 
-    apt.status = 'Ä°ptal Edildi';
+    apt.status = '\u0130ptal Edildi';
     saveLocal();
     await saveCloudSettings();
     renderAppointmentsTable(allAppointments);
@@ -237,7 +237,7 @@ async function cancelAppointment(id) {
 }
 
 async function deleteAppointment(id) {
-    if (!confirm("Bu randevuyu silmek istediÄŸinizden emin misiniz?")) return;
+    if (!confirm("Bu randevuyu silmek istedi\u011finizden emin misiniz?")) return;
     allAppointments = allAppointments.filter(a => a.id !== id);
     saveLocal();
     await saveCloudSettings();
@@ -249,25 +249,63 @@ function saveLocal() {
     localStorage.setItem('barber_appointments', JSON.stringify(allAppointments));
 }
 
-// Send Email to Customer on Confirmation
+// --- Statistics Counter ---
+function updateStats() {
+    document.getElementById('statTotal').textContent = allAppointments.length;
+    document.getElementById('statPending').textContent = allAppointments.filter(a => a.status === 'Offen').length;
+    document.getElementById('statConfirmed').textContent = allAppointments.filter(a => a.status === 'Onayland\u0131' || a.status === 'Onaylandi').length;
+    document.getElementById('statBahattin').textContent = allAppointments.filter(a => a.barber && a.barber.includes('Bahattin')).length;
+}
+
+// --- Search and Filter ---
+function filterAppointments() {
+    const searchVal = (document.getElementById('searchInput').value || '').toLowerCase();
+    const barberVal = document.getElementById('barberFilter').value;
+    const statusVal = document.getElementById('statusFilter').value;
+
+    const filtered = allAppointments.filter(apt => {
+        const matchSearch = (
+            (apt.name && apt.name.toLowerCase().includes(searchVal)) ||
+            (apt.phone && apt.phone.includes(searchVal)) ||
+            (apt.email && apt.email.toLowerCase().includes(searchVal)) ||
+            (apt.authCode && apt.authCode.toLowerCase().includes(searchVal)) ||
+            (apt.service && apt.service.toLowerCase().includes(searchVal))
+        );
+
+        let matchBarber = true;
+        if (barberVal !== 'all') {
+            matchBarber = (apt.barber && apt.barber.includes(barberVal));
+        }
+
+        let matchStatus = true;
+        if (statusVal !== 'all') {
+            matchStatus = (apt.status === statusVal);
+        }
+
+        return matchSearch && matchBarber && matchStatus;
+    });
+
+    renderAppointmentsTable(filtered);
+}
+
+// --- Customer Confirmation Email Dispatch ---
 async function sendCustomerConfirmationEmail(apt) {
     try {
         const payload = {
-            "_subject": `ğŸ’ˆ DER FINALE BARBERSHOP - Randevunuz OnaylandÄ±! [Kod: ${apt.authCode}]`,
+            "_subject": `\u2705 FINALE BARBERSHOP - Randevunuz Onayland\u0131! Kod: [${apt.authCode}]`,
             "_template": "table",
             "_captcha": "false",
-            "MÃ¼ÅŸteri": apt.name,
-            "Randevu Kodu": apt.authCode,
+            "Mesaj": `Say\u0131n ${apt.name}, Finale Barbershop randevunuz onaylanm\u0131\u015ft\u0131r.`,
+            "G\u00fcvenlik Kodunuz": apt.authCode,
             "Berber": apt.barber,
             "Tarih": apt.date,
             "Saat": apt.time,
             "Hizmet": apt.service,
-            "Adres": "WestendstraÃŸe 3, 64546 MÃ¶rfelden-Walldorf",
-            "Telefon": "0152 5164 9190",
-            "Bilgi": "Randevunuz berberimiz tarafÄ±ndan onaylanmÄ±ÅŸtÄ±r. Salona geldiÄŸinizde bu kodu iletmeniz yeterlidir."
+            "Salon Adresi": "Westendstra\u00dfe 3, 64546 M\u00f6rfelden-Walldorf",
+            "Salon Telefon": "0152 5164 9190",
+            "Bilgilendirme": "L\u00fctfen randevu saatinizde salonda olunuz ve g\u00fcvenlik kodunuzu s\u00f6yleyiniz."
         };
 
-        // Send via FormSubmit
         await fetch(`https://formsubmit.co/ajax/${apt.email}`, {
             method: "POST",
             headers: { 
@@ -276,37 +314,7 @@ async function sendCustomerConfirmationEmail(apt) {
             },
             body: JSON.stringify(payload)
         });
-    } catch (e) {
-        console.log("Customer email dispatch:", e);
+    } catch(err) {
+        console.error("Customer email dispatch error:", err);
     }
-}
-
-// --- Filter Appointments ---
-function filterAppointments() {
-    const query = (document.getElementById('searchInput').value || '').toLowerCase();
-    const barber = document.getElementById('barberFilter').value;
-    const status = document.getElementById('statusFilter').value;
-
-    const filtered = allAppointments.filter(apt => {
-        const matchesQuery = (
-            (apt.name && apt.name.toLowerCase().includes(query)) ||
-            (apt.phone && apt.phone.includes(query)) ||
-            (apt.authCode && apt.authCode.toLowerCase().includes(query)) ||
-            (apt.email && apt.email.toLowerCase().includes(query))
-        );
-        const matchesBarber = (barber === 'all' || (apt.barber && apt.barber.includes(barber)));
-        const matchesStatus = (status === 'all' || apt.status === status);
-
-        return matchesQuery && matchesBarber && matchesStatus;
-    });
-
-    renderAppointmentsTable(filtered);
-}
-
-// --- Update Stats ---
-function updateStats() {
-    document.getElementById('statTotal').textContent = allAppointments.length;
-    document.getElementById('statPending').textContent = allAppointments.filter(a => a.status === 'Offen').length;
-    document.getElementById('statConfirmed').textContent = allAppointments.filter(a => a.status === 'OnaylandÄ±').length;
-    document.getElementById('statBahattin').textContent = allAppointments.filter(a => a.barber && a.barber.includes('Bahattin')).length;
 }
