@@ -8,6 +8,7 @@ const CLOUD_DB_URL = `https://api.restful-api.dev/objects/${CLOUD_DB_ID}`;
 
 // Global App State
 let currentLang = 'de';
+let allExistingAppointments = [];
 let salonSettings = {
     isOpen: true,
     openHour: "09:00",
@@ -23,6 +24,7 @@ const translations = {
         navServices: "Preise & Pakete",
         navContact: "Kontakt & Anfahrt",
         navBookBtn: "Termin Buchen",
+        navBooking: "Termin Buchen",
         walkInBadge: "Ohne Termin m\u00f6glich",
         heroTitle: "Perfekter Cut & <span class=\"gold-gradient\">Pr\u00e4zise Bartpflege</span>",
         heroSubtitle: "Willkommen bei Finale Barbershop in M\u00f6rfelden-Walldorf. Wir bieten Ihnen professionelle Herrenhaarschnitte, moderne Fades und erstklassiges Styling in entspannter Atmosph\u00e4re.",
@@ -81,7 +83,7 @@ const translations = {
         bookingTitle: "Wunschtermin Vereinbaren",
         bookingSub: "W\u00e4hlen Sie Ihren Barber, Datum und Uhrzeit aus. Sie erhalten sofort einen Sicherheitscode.",
         lblBarber: "W\u00e4hlen Sie Ihren Barber",
-        barber1Role: "Usta Berber / Master Stylist",
+        barber1Role: "Usta Berber / Master",
         barber2Role: "N\u00e4chster freier Barber",
         lblService: "Gew\u00fcnschte Leistung",
         phSelectService: "Bitte Leistung w\u00e4hlen...",
@@ -127,6 +129,7 @@ const translations = {
         navServices: "Fiyatlar & Paketler",
         navContact: "\u0130leti\u015fim & Konum",
         navBookBtn: "Randevu Al",
+        navBooking: "Randevu Al",
         walkInBadge: "Randevusuz Gelinebilir",
         heroTitle: "Kusursuz Kesim & <span class=\"gold-gradient\">Profesyonel Sakal Bak\u0131m\u0131</span>",
         heroSubtitle: "Finale Barbershop M\u00f6rfelden-Walldorf'a ho\u015f geldiniz. Profesyonel sa\u00e7 kesimi, modern fade ge\u00e7i\u015fleri ve birinci s\u0131n\u0131f sakal tasar\u0131m\u0131n\u0131 rahat bir atmosferde sunuyoruz.",
@@ -185,7 +188,7 @@ const translations = {
         bookingTitle: "Hemen Randevunuzu Olu\u015fturun",
         bookingSub: "Berberinizi, tarihi ve saati se\u00e7in. Randevu olu\u015fturuldu\u011funda g\u00fcvenlik kodunuzu an\u0131nda alacaks\u0131n\u0131z.",
         lblBarber: "Berberinizi Se\u00e7in",
-        barber1Role: "Usta Berber / Master Stylist",
+        barber1Role: "Usta Berber / Master",
         barber2Role: "\u0130lk M\u00fcsait Usta / Ekip",
         lblService: "Almak \u0130stedi\u011finiz Hizmet",
         phSelectService: "L\u00fctfen bir hizmet se\u00e7iniz...",
@@ -231,6 +234,7 @@ const translations = {
         navServices: "Prices & Packages",
         navContact: "Contact",
         navBookBtn: "Book Appointment",
+        navBooking: "Book Appointment",
         walkInBadge: "Walk-ins Welcome",
         heroTitle: "Flawless Cuts & <span class=\"gold-gradient\">Precision Beard Care</span>",
         heroSubtitle: "Welcome to Finale Barbershop in M\u00f6rfelden-Walldorf. We offer premium men's haircuts, sharp skin fades, and expert styling in a relaxed atmosphere.",
@@ -336,7 +340,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initMobileNav();
     initDatePicker();
     initBookingForm();
-    loadSalonSettings();
+    loadSalonSettingsAndAppointments();
 });
 
 // --- Language Switcher ---
@@ -390,28 +394,30 @@ function initMobileNav() {
     }
 }
 
-// --- Barber Selection (R8 Logic) ---
+// --- Barber Selection (Separate Calendar Handler) ---
 function selectBarber(barberName) {
     const barberInput = document.getElementById('selectedBarber');
     if (barberInput) barberInput.value = barberName;
 
     const bBahattin = document.getElementById('barberBahattin');
     const bTeam = document.getElementById('barberTeam');
+    const indicatorName = document.getElementById('calendarBarberName');
 
     if (barberName.includes('Bahattin')) {
-        if (bBahattin) {
-            bBahattin.classList.add('selected', 'active');
-        }
-        if (bTeam) {
-            bTeam.classList.remove('selected', 'active');
-        }
+        if (bBahattin) bBahattin.classList.add('selected');
+        if (bTeam) bTeam.classList.remove('selected');
+        if (indicatorName) indicatorName.textContent = 'Bahattin';
     } else {
-        if (bBahattin) {
-            bBahattin.classList.remove('selected', 'active');
-        }
-        if (bTeam) {
-            bTeam.classList.add('selected', 'active');
-        }
+        if (bBahattin) bBahattin.classList.remove('selected');
+        if (bTeam) bTeam.classList.add('selected');
+        if (indicatorName) indicatorName.textContent = (currentLang === 'tr' ? 'Finale Ekibi' : 'Finale Team');
+    }
+
+    // Immediately re-render time slots for the selected date and new barber!
+    const dateInput = document.getElementById('bookingDate');
+    if (dateInput && dateInput.value) {
+        const selectedDate = new Date(dateInput.value + 'T00:00:00');
+        renderTimeSlots(dateInput.value, selectedDate.getDay());
     }
 }
 
@@ -480,10 +486,11 @@ function clearTimeSlots() {
     }
 }
 
-// --- Render Time Slots with Past Hour Block ---
+// --- Render Time Slots with Barber-Specific Availability & Past Hour Filter ---
 function renderTimeSlots(dateStr, dayOfWeek) {
     const container = document.getElementById('timeSlotsContainer');
     const hiddenInput = document.getElementById('selectedTimeSlot');
+    const currentSelectedBarber = document.getElementById('selectedBarber').value || 'Bahattin';
     if (!container || !hiddenInput) return;
 
     hiddenInput.value = '';
@@ -496,6 +503,16 @@ function renderTimeSlots(dateStr, dayOfWeek) {
     const isToday = now.toISOString().split('T')[0] === dateStr;
     const currentHour = now.getHours();
     const currentMin = now.getMinutes();
+
+    // Filter appointments booked ONLY for the currently selected barber on this date!
+    const bookedTimesForBarber = allExistingAppointments
+        .filter(apt => {
+            const isMatchDate = (apt.date === dateStr);
+            const isMatchBarber = (apt.barber && apt.barber.includes(currentSelectedBarber.includes('Bahattin') ? 'Bahattin' : 'Team') || (apt.barber === currentSelectedBarber));
+            const isNotCancelled = (apt.status !== '\u0130ptal Edildi' && apt.status !== 'Iptal Edildi');
+            return isMatchDate && isMatchBarber && isNotCancelled;
+        })
+        .map(apt => apt.time);
 
     const slots = [];
     for (let h = startH; h < endH; h++) {
@@ -511,6 +528,7 @@ function renderTimeSlots(dateStr, dayOfWeek) {
 
         const [slotH, slotM] = time.split(':').map(Number);
         let isPast = false;
+        let isBooked = bookedTimesForBarber.includes(time);
 
         if (isToday) {
             if (slotH < currentHour || (slotH === currentHour && slotM <= currentMin)) {
@@ -522,6 +540,10 @@ function renderTimeSlots(dateStr, dayOfWeek) {
             btn.classList.add('past');
             btn.disabled = true;
             btn.innerHTML = `<span>${time}</span><small>${currentLang === 'tr' ? 'Ge\u00e7ti' : 'Vorbei'}</small>`;
+        } else if (isBooked) {
+            btn.classList.add('booked');
+            btn.disabled = true;
+            btn.innerHTML = `<span>${time}</span><small>${currentLang === 'tr' ? 'Dolu' : 'Belegt'}</small>`;
         } else {
             btn.innerHTML = `<span>${time}</span><small>${currentLang === 'tr' ? 'M\u00fcsait' : 'Frei'}</small>`;
             btn.addEventListener('click', () => {
@@ -541,8 +563,8 @@ function generateAuthCode() {
     return `FN-${randomNum}`;
 }
 
-// --- Cloud DB Salon Settings & Live Status ---
-async function loadSalonSettings() {
+// --- Cloud DB Salon Settings & Appointments Loader ---
+async function loadSalonSettingsAndAppointments() {
     try {
         const res = await fetch(CLOUD_DB_URL);
         if (res.ok) {
@@ -551,10 +573,19 @@ async function loadSalonSettings() {
                 salonSettings.isOpen = (data.data.isOpen === true || data.data.isOpen === "true");
                 salonSettings.openHour = data.data.openHour || "09:00";
                 salonSettings.closeHour = data.data.closeHour || "19:00";
+                
+                if (data.data.appointments) {
+                    try {
+                        allExistingAppointments = JSON.parse(data.data.appointments);
+                    } catch(err) {
+                        allExistingAppointments = [];
+                    }
+                }
             }
         }
     } catch (e) {
-        console.log("Using cached/default settings:", e);
+        console.log("Using cached/local data:", e);
+        allExistingAppointments = JSON.parse(localStorage.getItem('barber_appointments') || '[]');
     }
     applySalonSettings();
 }
@@ -660,6 +691,8 @@ function initBookingForm() {
             createdAt: new Date().toISOString()
         };
 
+        allExistingAppointments.unshift(appointmentData);
+
         // 1. Save Locally
         saveLocalAppointment(appointmentData);
 
@@ -731,19 +764,19 @@ async function saveCloudAppointment(apt) {
 async function sendEmailNotification(apt) {
     try {
         const payload = {
-            "_subject": `???? FINALE BARBER [${apt.authCode}] - ${apt.barber} Randevusu`,
+            "_subject": `\uD83D\uDC88 FINALE BARBER [${apt.authCode}] - ${apt.barber} Randevusu`,
             "_template": "table",
             "_captcha": "false",
-            "G??venlik Kodu": apt.authCode,
-            "Se??ilen Berber": apt.barber,
-            "M????teri Ad??": apt.name,
+            "G\u00fcvenlik Kodu": apt.authCode,
+            "Se\u00e7ilen Berber": apt.barber,
+            "M\u00fc\u015fteri Ad\u0131": apt.name,
             "Telefon": apt.phone,
             "E-Mail": apt.email,
             "Tarih": apt.date,
             "Saat": apt.time,
             "Hizmet": apt.service,
             "Notlar": apt.notes,
-            "Kay??t Tarihi": new Date().toLocaleString('de-DE')
+            "Kay\u0131t Tarihi": new Date().toLocaleString('de-DE')
         };
 
         await fetch(`https://formsubmit.co/ajax/${BARBER_EMAIL}`, {
